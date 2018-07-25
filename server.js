@@ -24,14 +24,16 @@ app.use(expressSession({
     saveUninitialized:false,
 
 }))
+
+//some static files//
+app.use('/',express.static(__dirname+'/public_html/home'))
+app.use('/apply',express.static(__dirname+'/public_html/apply'))
 //passport//
 app.use(passport.initialize())
 app.use(passport.session())
 //routes
-app.get('/',(req,res)=>{
-    res.send("hi")                            //why can't i useapp.use(on using it  buffering occur or it send hi every where)
-    //res.render('home')
-})
+/*app.use('/api/v1/' ,require('./routes/api_v1'))*/
+app.use('/api/v1/apply',require('./routes/application.js'))
 app.use('/profile',require('./routes/Ruser'))
 app.use('/auth',require('./routes/Rauth'))
 app.listen(2500,()=>{

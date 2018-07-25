@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply</title>
+    <link rel="stylesheet" href="../../public/component/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../../public/component/bootstrap/bootstrap.js">
+</head>
+<body class="bg-light">
+
+<div class="container bg-white">
+
+    <div class="col-12 bg-dark">
+        <h2 class="text-center py-2 text-white">Application for Bus Pass</h2>
+    </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fatherName">Father's Name</label>
+                    <input type="text" class="form-control" id="fatherName" name="fatherName" placeholder="Father's Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" name="age" id="age" placeholder="Age">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Your Address">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="course">Course</label>
+                    <input type="text" class="form-control" id="course" name="course" placeholder="Course(like Btechor Bsc. or Class in case of school)">
+                </div>
+                <div class="col-md-6">
+                    <label for="id">Unique RollNo.</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="DTU/2k16/co/265">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="year">Semester</label>
+                    <input type="number" class="form-control" id="year" name="year" placeholder="1-10">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="institute">Institute</label>
+                    <select id="institute" class="form-control">
+                        <option name="">Select Your Institute</option>
+                        <option name="DTU">Delhi Technological Institute</option>
+                        <option name="NSIT">Netaji Shubhas Institute of Technology</option>
+                        <option name="DITE">Delhi Institute of Tool Engineering</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 text-center">
+                    <button  id="btnSubmit"  class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+
+
+
+</div>
+<script src="../../public/component/jquery/jquery-3.2.1.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
