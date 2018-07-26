@@ -28,6 +28,7 @@ app.use(expressSession({
 //some static files//
 app.use('/',express.static(__dirname+'/public_html/home'))
 app.use('/apply',express.static(__dirname+'/public_html/apply'))
+app.use('/status',express.static(__dirname+'/public_html/get status'))
 //passport//
 app.use(passport.initialize())
 app.use(passport.session())

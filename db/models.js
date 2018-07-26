@@ -7,7 +7,7 @@ const db=new Sequelize(dbconfig.NAME,dbconfig.USER,dbconfig.PASSWORD,{
 const user=db.define('user',{
     id:{
         allowNull:false,
-        type:dt.STRING,
+        type:dt.INTEGER,
         autoIncrement:true,
         primaryKey:true
     },
@@ -66,10 +66,24 @@ const application=db.define('application',{
     email:{
         allowNull:false,
         type:dt.STRING
+    },
+    status:{
+        allowNull:false,
+        type:dt.STRING,
+        defaultValue:"Pending"
+    },
+    idCard:{
+        allowNull:false,
+        type:dt.STRING,
+    },
+    feeReceipt:{
+        allowNull:false,
+        type:dt.STRING
     }
 })
 db.sync({
     //alter:true
+    force:true
 }).then(()=>{
     console.log("dc sync")
 })

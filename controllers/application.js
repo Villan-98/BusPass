@@ -10,9 +10,19 @@ function newApplication(data){
         year:data.year,
         address:data.address,
         email:data.email,
-        id:data.id
+        id:data.id,
+        idCard:data.idCard,
+        feeReceipt:data.feeReceipt
+    })
+}
+function getStatus(data){
+    return application.findOne({
+        where: {
+            id: data.id
+        }
     })
 }
 module.exports={
-    newApplication:newApplication
+    newApplication:newApplication,
+    getStatus:getStatus
 }

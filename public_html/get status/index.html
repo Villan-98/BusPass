@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../../public/component/bootstrap/bootstrap.css"></link>
+    <script src="../../public/component/jquery/jquery-3.2.1.js"></script>
+    <script src="../../public/component/bootstrap/bootstrap.js"></script>
+
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark justify-content-end">
+
+    <a class="nav-link px-4" href="/" style="font-size:15px">Home</a>
+
+    <a class="nav-link px-4" href="/apply" style="font-size:15px">Apply</a>
+
+    <a class="nav-link px-4" href="/" style="font-size:15px">Signin</a>
+
+    <a class="nav-link px-4" href="/" style="font-size:15px">Signup</a>
+
+    <a class="nav-link px-4" href="/" style="font-size:15px">Status</a>
+    </ul>
+    </div>
+</nav>
+
+<div class="container-fluid mt-5" id="main">
+    <div class="row mt-5 py-4">
+        <div class="col-md-8 offset-2 bg-white" id="block">
+            <h3 class="h3 py-4 text-center my-4">Get your Application Status</h3>
+            <div class="form-row text-center pb-4 mb-5 ">
+                <div class="form-group offset-2 col-md-6">
+
+                    <input type="text" class="form-control" id="id"  placeholder="Enter your roll No.">
+                </div>
+                <div class="col-md-2">
+
+                    <button class="btn btn-primary px-3" id="getStatus">Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function(){
+        console.log("connected")
+
+        let getStatus=$('#getStatus')
+        let id=$('#id')
+        let container=$('#main')
+        let block=$('#block')
+        getStatus.click(()=>{
+             let myId=id.val()
+            console.log("btn clicked")
+            $.get(`/api/v1/apply/status?id=${myId}`,(data)=>{
+                console.log(data)
+                block.empty()
+                console.log("length is"+data.data.length)
+                if(data.data.length)
+                {
+                    block.append(`
+                    <div class="alert-danger"> May be you have written wrong Id</div>`)
+                }
+                else
+                {
+                    container.append(`<div class="row">
+                                <div class="col-md-6 offset-2">
+                                   <h3 class="h3"> done</h3>
+                                </div>
+                            </div>`)
+                }
+            })
+        })
+    })
+</script>
+
+</html>

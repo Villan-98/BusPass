@@ -1,7 +1,6 @@
 $(function(){
     let submit=$('#btnSubmit')
     let api='/api/v1'
-
     submit.click(function(){
         console.log("button clicked")
         let name=$('#name').val()
@@ -13,6 +12,7 @@ $(function(){
         let email=$('#email').val()
         let course=$('#course').val()
         let id=$('#id').val()
+        let container=$('.container')
         if(!name||!institute||!course||!address||!email||!year||!fatherName||!age||!id)
         {
             console.log("invalid data")
@@ -40,7 +40,22 @@ $(function(){
                 type:"POST",
                 data:data,
                 success:function() {
-                    console.log("data posted")
+                    container.empty().append(`
+<div class="bg-white offset-2">
+
+    <div class="row mt-5 py-5">
+        <div class="col ">
+            <h3 class="h2 text-center text-success "> Application Submitted </h3>
+            <h2 class="h3 text-center text-primary " > To check request status use your roll no.</h2>
+
+        </div>
+    </div>
+</div>
+                                            
+
+
+
+                        `)
 
                 }
             })

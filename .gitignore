@@ -2,3 +2,5 @@
 node_modules/
 config.json
 public/component/
+public/assets/uploads
+upload
