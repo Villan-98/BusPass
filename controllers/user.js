@@ -3,7 +3,7 @@ module.exports={
     insert_user:async(requery)=>{
         console.log(requery)
         User.create({
-            user_name:requery.name,
+            userName:requery.name,
             password:requery.password
         })
     }

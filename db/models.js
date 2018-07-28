@@ -21,7 +21,8 @@ const user=db.define('user',{
     },
     role:{
         allowNull:false,
-        type:dt.STRING
+        type:dt.STRING,
+        defaultValue:"admin"
     }
 })
 const application=db.define('application',{
@@ -83,7 +84,7 @@ const application=db.define('application',{
 })
 db.sync({
     //alter:true
-    force:true
+    //force:true
 }).then(()=>{
     console.log("dc sync")
 })

@@ -6,10 +6,9 @@ const localStrategy = new LocalStrategy(
         console.log(username,password)
         User.findOne({
             where: {
-                user_name: username
+                userName: username
             }
         }).then((user) => {
-            console.log(user)
             if (!user) {
                 //Wrong username
                 return done(null, false, {message: 'Wrong username'})
