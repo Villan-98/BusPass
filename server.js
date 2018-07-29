@@ -25,17 +25,34 @@ app.use(expressSession({
 
 }))
 
+//passport//
+app.use(passport.initialize())
+app.use(passport.session())
+//routes
+
+app.use('/admin',(req,res,next)=>{
+    console.log(req.user)
+    if(req.isAuthenticated())
+    {
+        if(req.user.role==='admin')
+        {
+            console.log("done")
+            next()
+        }
+    }
+    else{
+        console.log("wrong user")
+        res.redirect('/auth/signin')
+    }
+})
+
 //some static files//
 app.use('/',express.static(__dirname+'/public_html/home'))
 app.use('/apply',express.static(__dirname+'/public_html/apply'))
 app.use('/status',express.static(__dirname+'/public_html/get status'))
 app.use('/admin',express.static(__dirname+'/public_html/admin'))
-app.use('/admin/apply/transport',express.static(__dirname+'/public_html/admin/transport'))
-app.use('/admin/apply/busManager',express.static(__dirname+'/public_html/admin/bus'))
-//passport//
-app.use(passport.initialize())
-app.use(passport.session())
-//routes
+app.use('/admin/apply/transport',express.static(__dirname+'/public_html/admin/apply/transport'))
+app.use('/admin/apply/busManager',express.static(__dirname+'/public_html/admin/apply/bus'))
 /*app.use('/api/v1/' ,require('./routes/api_v1'))*/
 app.use('/api/v1/apply',require('./routes/application.js'))
 app.use('/profile',require('./routes/Ruser'))

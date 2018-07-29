@@ -12,7 +12,8 @@ function newApplication(data){
         email:data.email,
         id:data.id,
         idCard:data.idCard,
-        feeReceipt:data.feeReceipt
+        feeReceipt:data.feeReceipt,
+        paymentSs:data.paymentSs
     })
 }
 function getStatus(data){

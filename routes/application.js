@@ -17,7 +17,7 @@ function fileFilter(file,cb){
     }
 
 }
-route.post('/',upload.array('photo',2),(r,s)=>{
+route.post('/',upload.array('photo',3),(r,s)=>{
 
     /*if(r.files.length<1)
     {                                                   //it is undefined even though files get  loaded
@@ -91,6 +91,9 @@ route.post('/',upload.array('photo',2),(r,s)=>{
         {
             r.body['idCard']=filename
             file++;
+        } else if(i===2)
+        {
+            r.body['paymentSs']=filename
         }
     }
     application.newApplication(r.body)

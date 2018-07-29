@@ -80,11 +80,15 @@ const application=db.define('application',{
     feeReceipt:{
         allowNull:false,
         type:dt.STRING
+    },
+    paymentSs:{
+        allowNull:false,
+        type:dt.STRING
     }
 })
 db.sync({
     //alter:true
-    //force:true
+    force:true
 }).then(()=>{
     console.log("dc sync")
 })
