@@ -4,3 +4,4 @@ config.json
 public/component/
 public/assets/uploads
 upload
+bower_components/

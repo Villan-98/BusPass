@@ -12,7 +12,9 @@ $(function(){
         let collDep=$('#collDep').val()
         if(!name||!dob||!secret||!role||!password||!role||!cpassword||!collDep)
         {
-            console.log("blank data are not allowed")
+            $.toast({
+
+            })
         }
         else{
             if(password!==cpassword)
