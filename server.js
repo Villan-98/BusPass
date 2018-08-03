@@ -78,18 +78,14 @@ app.use('/user/depotManager/',(req,res,next)=>{
     }
 })
 //some static files//
+app.use('/bowerComponents',express.static(__dirname+'/bower_components'))
 app.use('/',express.static(__dirname+'/public_html/home'))
-app.use('/apply',express.static(__dirname+'/public_html/apply'))
-app.use('/status',express.static(__dirname+'/public_html/get status'))
 app.use('/admin',express.static(__dirname+'/public_html/admin'))
-app.use('/transport',express.static(__dirname+'/public_html/user/transportHead'))
-app.use('/depotManager',express.static(__dirname+'/public_html/user/depotManager'))
-app.use('/admin/apply/transport',express.static(__dirname+'/public_html/admin/apply/transport'))
-app.use('/admin/apply/busManager',express.static(__dirname+'/public_html/admin/apply/bus'))
+app.use('/user',express.static(__dirname+'/public_html/user'))
 /*app.use('/api/v1/' ,require('./routes/api_v1'))*/
 /**various routes**/
 app.use('/api/v1/apply',require('./routes/application.js'))
-app.use('api/v1/admin',require('./routes/api_v1/admin'))
+//app.use('api/v1/admin',require('./routes/api_v1/admin'))
 app.use('/determinator',require('./routes/Ruser'))
 app.use('/auth',require('./routes/Rauth'))
 app.listen(2500,()=>{

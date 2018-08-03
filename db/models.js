@@ -88,7 +88,7 @@ const application=db.define('application',{
 })
 db.sync({
     //alter:true
-    force:true
+    //force:true
 }).then(()=>{
     console.log("dc sync")
 })

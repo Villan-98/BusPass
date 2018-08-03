@@ -12,8 +12,9 @@ $(function(){
         let collDep=$('#collDep').val()
         if(!name||!dob||!secret||!role||!password||!role||!cpassword||!collDep)
         {
+            console.log("invalid ")
             $.toast({
-
+                text:"please fill all the column"
             })
         }
         else{
@@ -21,23 +22,22 @@ $(function(){
             {
                 console.log("password is not correct")
             }
-        }
-        let value={
-            name:name,
-            dob:dob,
-            secret:secret,
-            role:role,
-            password:password,
-            collDep:collDep
-        }
-        console.log(value)
-        $.ajax({
-            type:"POST",
-            url:"/auth/signup",
-            data:value,
-            success:(data)=> {
-                if (data) {
-                    forms.empty().append(`
+            let value={
+                name:name,
+                dob:dob,
+                secret:secret,
+                role:role,
+                password:password,
+                collDep:collDep
+            }
+            console.log(value)
+            $.ajax({
+                type:"POST",
+                url:"/auth/signup",
+                data:value,
+                success:(data)=> {
+                    if (data) {
+                        forms.empty().append(`
                                             <div class="bg-white offset-2">
 
                                                     <div class="row mt-5 py-5">
@@ -47,7 +47,9 @@ $(function(){
                                                     </div>
                                             </div>
                                         `)
+                    }
                 }
-            }
-        }) })
+            })
+        }
+        })
 })
