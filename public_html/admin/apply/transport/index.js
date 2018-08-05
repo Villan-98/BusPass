@@ -50,7 +50,7 @@ $(function(){
             }
             $.ajax({
                 type:"POST",
-                url:"/addUser",
+                url:"/api/v1/admin/addUser",
                 data:value,
                 success:(data)=> {
                         console.log("useradded")

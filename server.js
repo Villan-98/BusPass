@@ -81,12 +81,9 @@ app.use('/bowerComponents',express.static(__dirname+'/bower_components'))
 app.use('/',express.static(__dirname+'/public_html/home'))
 app.use('/admin',express.static(__dirname+'/public_html/admin'))
 app.use('/user',express.static(__dirname+'/public_html/user'))
-/*app.use('/api/v1/' ,require('./routes/api_v1'))*/
-/**various routes**/
 
-app.use('/api/v1/apply',require('./routes/application.js'))
-app.use('/adduser',require('./routes/api_v1/admin'))
-app.use('/determinator',require('./routes/Ruser'))
+/**various routes**/
+app.use('/api/v1/' ,require('./routes/api_v1'))
 app.use('/auth',require('./routes/Rauth'))
 app.listen(2500,()=>{
     console.log("http://localhost:2500")

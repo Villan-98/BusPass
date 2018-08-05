@@ -3,7 +3,7 @@ const multer=require('multer')
 const fs=require('fs')
 const path=require('path')
 var upload=multer({dest:'upload'})
-const application=require('../controllers/application')
+const application=require('../../controllers/application')
 function fileFilter(file,cb){
     let filetype=/png|jpg|jpeg/
     const extname=filetype.test(path.extname(file.originalname).toLowerCase())

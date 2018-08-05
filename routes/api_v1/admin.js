@@ -3,10 +3,10 @@ const route=require('express').Router()
 const passport=require('../../passport')
 const ctrlUser=require('../../controllers/user')
 const config=require('../../config')
-route.get('/',passport.authenticate('local'),(req,res)=>{
+route.get('/',(req,res)=>{
     res.send("hi")
 })
-route.post('/',(req,res)=>{
+route.post('/adduser',(req,res)=>{
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')
