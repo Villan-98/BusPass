@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Admin</title>
 
-    <link rel="stylesheet" href="../../../../bower_components/bootstrap/dist/css/bootstrap.css">
-
+    <link rel="stylesheet" href="../../../../bowerComponents/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../bowerComponents/jquery-toast-plugin/src/jquery.toast.js">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark justify-content-end">
@@ -13,7 +13,7 @@
     <a class="nav-link px-4" href="" id="navAdmin"  style="font-size:15px"> Admin</a>
 
 
-    <a class="nav-link px-4" href="/admin/apply/busManager" id="navDepot" style="font-size:15px">Depot Manager</a>
+    <a class="nav-link px-4" href="/admin/apply/bus" id="navDepot" style="font-size:15px">Depot Manager</a>
 
     <a class="nav-link px-4" href="/admin/apply/transport" id="navTransport" style="font-size:15px">Transport Head</a>
     <a class="nav-link px-4" href="#" id="navLogout" style="font-size:15px">Logout</a>
@@ -21,31 +21,31 @@
 </nav>
 <div class="container">
     <div id="forms">
-        <div class="row mt-5  bg-light">
-            <div class="col px-0">
-                <h2 class="h2 bg-dark text-white py-2 mb-3 px-0 mt-0 text-center">Add Transport Head</h2>
+        <div class="row mt-5  ">
+            <div class="col-10 offset-1 bg-light">
+                <h2 class="h2 bg-dark text-white py-2 mb-3 ml-0  mt-0 text-center">Add Transport Head</h2>
                 <div class="form-row px-4">
-                    <div class="col-md-3">
+                    <div class="col-md-5 pl-5">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5 offset-1 ">
                         <div class="form-group">
                             <label for="employeeId">Employee ID Number</label>
-                            <input type="text" class="form-control" id="employeeId" placeholder="Employee Id(11111)" name="employeeId" required>
+                            <input type="text" class="form-control" id="employeeId" placeholder="Employee Id(1111)" name="employeeId" required>
                         </div>
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-3">
+                    <div class="col-md-5 pl-5">
                         <div class="form-group">
                             <label for="Secret">Secret</label>
-                            <input type="password" class="form-control" id="secret" placeholder="Secret" name="emailId" required>
+                            <input type="password" class="form-control" id="secret" placeholder="Secret" name="secret" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5 offset-1">
                         <div class="form-group">
                             <label for="dob">Date of Birth</label>
                             <input type="date" class="form-control" id="dob" name="dob" required>
@@ -53,31 +53,31 @@
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-3">
+                    <div class="col-md-5 pl-5">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5 offset-1">
                         <div class="form-group">
                             <label for="cpassword">Confirm Password</label>
-                            <input type="text" class="form-control" id="cpassword" name="cpassword" required>
+                            <input type="text" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required>
                         </div>
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-3">
+                    <div class="col-md-5 pl-5">
                         <div class="form-group">
                             <label for="role">Role</label>
-                            <input type="text" class="form-control" id="role" name="role" required>
+                            <input type="text" class="form-control inactive" id="role" value="tranportHead" name="role" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5 offset-1">
                         <div class="form-group">
-                            <label class="" for="collDep">Select Your College</label>
+                            <label class="" for="collDep">Select College</label>
                             <select class="form-control" id="collDep" name="collDep">
-                                <option>Select Your College</option>
+                                <option>Select College</option>
                                 <option>Delhi Technologial University</option>
                                 <option>Netaji Subhas Institute of Technology</option>
                                 <option>Delhi Institute of Tool Engineering</option>
@@ -98,8 +98,10 @@
     </div>
 </div>
 
-<script src="../../../../bower_components/jquery/dist/jquery.js"></script>
-<script src="../../../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../../../../bowerComponents/jquery/dist/jquery.js"></script>
+<script src="../../../../bowerComponents/bootstrap/dist/js/bootstrap.js"></script>
+
+<script src="../../../../bowerComponents/jquery-toast-plugin/src/jquery.toast.js"></script>
 <script src="index.js"></script>
 </body>
 </html>

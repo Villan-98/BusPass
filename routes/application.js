@@ -17,6 +17,9 @@ function fileFilter(file,cb){
     }
 
 }
+route.get('/',(req,res)=>{
+    res.send("done");
+})
 route.post('/',upload.array('photo',3),(r,s)=>{
 
     /*if(r.files.length<1)

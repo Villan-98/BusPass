@@ -31,7 +31,6 @@ app.use(passport.session())
 //routes
 
 app.use('/admin',(req,res,next)=>{
-    console.log(req.user)
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')
@@ -47,7 +46,7 @@ app.use('/admin',(req,res,next)=>{
 })
 
 app.use('/user/transport/',(req,res,next)=>{
-    console.log(req.user)
+
     if(req.isAuthenticated())
     {
         if(req.user.role==='transportHead'||req.user.role==='depotManager')
@@ -63,7 +62,7 @@ app.use('/user/transport/',(req,res,next)=>{
 })
 
 app.use('/user/depotManager/',(req,res,next)=>{
-    console.log(req.user)
+
     if(req.isAuthenticated())
     {
         if(req.user.role==='depotManager')
@@ -84,8 +83,9 @@ app.use('/admin',express.static(__dirname+'/public_html/admin'))
 app.use('/user',express.static(__dirname+'/public_html/user'))
 /*app.use('/api/v1/' ,require('./routes/api_v1'))*/
 /**various routes**/
+
 app.use('/api/v1/apply',require('./routes/application.js'))
-//app.use('api/v1/admin',require('./routes/api_v1/admin'))
+app.use('/adduser',require('./routes/api_v1/admin'))
 app.use('/determinator',require('./routes/Ruser'))
 app.use('/auth',require('./routes/Rauth'))
 app.listen(2500,()=>{
