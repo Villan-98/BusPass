@@ -25,6 +25,30 @@ const user=db.define('user',{
         defaultValue:"admin"
     }
 })
+const college=db.define('college',{
+    id:{
+        allowNull:false,
+        type:dt.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    name:{
+        allowNULL:false,
+        type:dt.STRING
+    }
+})
+const busDepot=db.define('busDepot',{
+    id:{
+        allowNull:false,
+        type:dt.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    name:{
+        allowNULL:false,
+        type:dt.STRING
+    }
+})
 const application=db.define('application',{
     id:{
         allowNull:false,
@@ -93,5 +117,5 @@ db.sync({
     console.log("dc sync")
 })
 module.exports={
-    db,user,application
+    db,user,application,busDepot,college
 }

@@ -2,14 +2,36 @@
 $(function(){
     console.log("connected")
     let anchor=$('a')
-    let abc=$('#forms')
+    let forms=$('#forms')
     /**some onclick function to be used by index.html**/
     anchor.click((e)=>{
         let aName=(e.target).getAttribute('id')
         console.log(aName)
         let heading
         let selectOption
-        if(aName==='navDepot')
+        if(aName==='navAddClgDpt')
+        {
+            $('#forms').empty().append(`
+                                          <div class="row mt-5 bg-light">
+                                          <div class="col-12 my-5">
+                                            <h3 class="h3 py-2 text-white text-center bg-dark" ">Add Depot</h3>
+                                          
+                                            </div>
+                                           </div>
+                                        <div class="row bg-light pb-3">
+                                            <div class="col-5 offset-3">
+                                                <div class="form-group">
+                                                <label for="clgDept">Enter the Depot Name</label>
+                                                     <input type="text"class="form-control" id="clgDpt">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-center">
+                                            <button class="btn btn-primary" id="addDptClg" onclick="xyz(id)">ADD</button>
+</div>
+                                        </div>`)
+
+        }
+        /*if(aName==='navDepot')
         {
             heading='<h2 class="h2 bg-dark text-white py-2 mb-3 px-0 mt-0 text-center">Add Depot Manger</h2>'
             selectOption=`
@@ -110,11 +132,10 @@ $(function(){
                             </div>
                          </div>`)
 
-        }
+        }*/
     })
-
-    let submit=$('#submit')
-    abc.on('click',submit,(()=>{
+   /* let submit=$('#submit')
+    forms.on('click',submit,(()=>{
         console.log("submit")
         let name=$('#name').val()
         let dob=$('#dob').val()
@@ -165,5 +186,22 @@ $(function(){
             }
         })
 
-    }))
+    }))*/
+    window.xyz=function(e){
+        let depot=$('#clgDpt').val()
+        console.log("ih")
+        console.log(e)
+        console.log(depot);
+        $.ajax({
+            url:'/api/v1/depot/addDepot',
+            method:"POST",
+            data:depot,
+            success:((data)=>{
+                console.log("yeh")
+            })
+
+        }).fail(()=>{
+            console.log("oopsss")
+        })
+    }
 })
