@@ -46,6 +46,7 @@ let forms=$('#forms')
 
                 label = 'Transport Head'
 
+
                 selectList=`
                             <label class="" for="collDep">Select College</label>
                             <select class="form-control" id="collDep" name="collDep">
@@ -232,6 +233,9 @@ let forms=$('#forms')
     addClgDpt=function(e){
         let clgDpt=$('#clgDpt').val()
         let subUrl
+        let value={
+            name:$('#clgDpt').val()
+        }
         if(!clgDpt)
         {
             $.toast({
@@ -259,7 +263,7 @@ let forms=$('#forms')
             $.ajax({
                 url:`/api/v1/${subUrl}`,
                 method:"POST",
-                data:clgDpt,
+                data:value,
                 success:((data)=>{
 
                     forms.empty().append(`

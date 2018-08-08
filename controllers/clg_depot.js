@@ -3,13 +3,14 @@ const college=require('../db/models').college
 const busDepot=require('../db/models').busDepot
 module.exports={
     insertCollege:async(requery)=>{
+
        return college.create({
-            user:requery.name
+            name:requery.name
         })
     },
     insertDepot:async(requery)=>{
        return  busDepot.create({
-            user:requery.name
+            name:requery.name
         })
     },
     getAllCollege:async(requery)=> {
