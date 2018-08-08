@@ -6,7 +6,7 @@ const config=require('../../config')
 route.get('/',(req,res)=>{
     res.send("hi")
 })
-route.post('/adduser',(req,res)=>{
+route.post('/addUser',(req,res)=>{
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')

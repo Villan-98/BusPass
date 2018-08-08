@@ -1,23 +1,23 @@
 // created by Villan-98//
+
 $(function(){
-    console.log("connected")
-    let anchor=$('a')
-    let forms=$('#forms')
-    /**some onclick function to be used by index.html**/
-    anchor.click((e)=>{
-        let aName=(e.target).getAttribute('id')
-        if(aName==='navAddClg' || aName==='navAddDpt')
-        {
-            let ID,label
-            if(aName==='navAddClg')
+console.log("connected")
+let anchor=$('a')
+let forms=$('#forms')
+/**some onclick function to be used by index.html**/
+    anchor.click((e)=> {
+        let aName = (e.target).getAttribute('id')
+        if (aName === 'navAddClg' || aName === 'navAddDpt') {
+            let ID, label,role,selectList
+            if (aName === 'navAddClg')
             {
-                ID='addCollege'
-                label='College'
+                label = 'College'
             }
-            else {
-                ID='addDepot'
-                label='Depot'
+            else if(aName==='navAddDpt')
+            {
+                label = 'Depot'
             }
+
             $('#forms').empty().append(`
                                           <div class="row mt-5 bg-light">
                                           <div class="col-12 my-5">
@@ -33,117 +33,121 @@ $(function(){
                                                 </div>
                                             </div>
                                             <div class="col-12 text-center">
-                                            <button class="btn btn-primary" id=${ID} onclick="xyz(id)">ADD</button>
+                                            <button class="btn btn-primary" id=${label} onclick="clickFun(id)">ADD</button>
 </div>
                                         </div>`)
 
         }
-        /*if(aName==='navDepot')
+        if(aName === 'navDepot'||aName==='navTransport')
         {
-            heading='<h2 class="h2 bg-dark text-white py-2 mb-3 px-0 mt-0 text-center">Add Depot Manger</h2>'
-            selectOption=`
-                            <label  for="collDep">Select Your Depot</label>
+            let label,selectList
+            if(aName==='navTransport')
+            {
+
+                label = 'Transport Head'
+
+                selectList=`
+                            <label class="" for="collDep">Select College</label>
                             <select class="form-control" id="collDep" name="collDep">
-                                                <option>Select Bus Depot</option>
-                                                <option>Bawana</option>
-                                                <option>Keshopur Depot</option>
-                                                <option>Rohini Depot-2 </option>
-                                                <option>Nangloi</option>
-                                                <option>Peera Garhi</option>    
-</select>`
-        }
-        if(aName==='navTransport')
-        {
-            heading='<h2 class="h2 bg-dark text-white py-2 mb-3 px-0 mt-0 text-center">Add transport Head</h2>'
-            selectOption=`
-                                        <label class="" for="collDep">Select Your College</label>
-                                        <select class="form-control" id="collDep" name="collDep">
-                                                <option>Select Your College</option>
-                                                <option>Delhi Technologial University</option>
-                                                <option>Netaji Subhas Institute of Technology</option>
-                                                <option>Delhi Institute of Tool Engineering</option>
-                                                </select>
-                                                    `
-        }
-        abc.empty()
-        if(aName==='navDepot'||aName==='navTransport')
-        {
-            abc.append(`<div class="row mt-5  bg-light">
-                            <div class="col px-0">
-                            ${heading}
-                                <div class="form-row px-4">
-                                       <div class="col-md-3">
-                                            <div class="form-group">
-                                                  <label for="name">Name</label>
-                                                  <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="employeeId">Employee ID Number</label>
-                                                <input type="text" class="form-control" id="employeeId" placeholder="Employee Id(11111)" name="employeeId" required>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="form-row px-4">
-                                       <div class="col-md-3">
-                                            <div class="form-group">
-                                                  <label for="Secret">Secret</label>
-                                                  <input type="password" class="form-control" id="secret" placeholder="Secret" name="emailId" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="dob">Date of Birth</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" required>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="form-row px-4">
-                                       <div class="col-md-3">
-                                            <div class="form-group">
-                                                  <label for="password">Password</label>
-                                                  <input type="password" class="form-control" id="password" name="password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="cpassword">Confirm Password</label>
-                                                <input type="text" class="form-control" id="cpassword" name="cpassword" required>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="form-row px-4">
-                                       <div class="col-md-3">
-                                            <div class="form-group">
-                                                  <label for="role">Role</label>
-                                                  <input type="text" class="form-control" id="role" name="role" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                ${selectOption}
-                                            </div>
-                                        </div>
-                                </div> 
-                                
-            <div class="form-row">
-                <div class="col-md-3 offset-5">
-                    <div class="form-group">
-                    <button id="submit" class="btn btn-primary">Submit</button>
+                                <option>Select College</option>
+                                <option>Delhi Technologial University</option>
+                                <option>Netaji Subhas Institute of Technology</option>
+                                <option>Delhi Institute of Tool Engineering</option>
+                            </select>`
+            }
+            else if(aName==='navDepot')
+            {
+                label = 'Depot Manager'
+
+                selectList=` <label  for="collDep">Select Your Depot</label>
+                            <select class="form-control" id="collDep" name="collDep">
+                                <option>Select Bus Depot</option>
+                                <option>Bawana</option>
+                                <option>Keshopur Depot</option>
+                                <option>Rohini Depot-2 </option>
+                                <option>Nangloi</option>
+                                <option>Peera Garhi</option>
+                            </select>`
+            }
+          $('#forms').empty().append(`
+          <div class="row mt-5  ">
+            <div class="col-10 offset-1 bg-light">
+                <h2 class="h2 bg-dark text-white py-2 mb-3 ml-0  mt-0 text-center">Add ${label}</h2>
+                <div class="form-row px-4">
+                    <div class="col-md-5 pl-5">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-1 ">
+                        <div class="form-group">
+                            <label for="employeeId">Employee ID Number</label>
+                            <input type="text" class="form-control" id="employeeId" placeholder="Employee Id(1111)" name="employeeId" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row px-4">
+                    <div class="col-md-5 pl-5">
+                        <div class="form-group">
+                            <label for="Secret">Secret</label>
+                            <input type="password" class="form-control" id="secret" placeholder="Secret" name="secret" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-1">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob" name="dob" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row px-4">
+                    <div class="col-md-5 pl-5">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-1">
+                        <div class="form-group">
+                            <label for="cpassword">Confirm Password</label>
+                            <input type="text" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row px-4">
+                    <div class="col-md-5 pl-5">
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <input type="text" class="form-control disabled" id="role" value="${label}" name="role" >
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-1">
+                        <div class="form-group">
+                            ${selectList}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-3 offset-5">
+                        <div class="form-group">
+                            <button id="${label}" onclick="clickFun(id)"class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-                                 
-                                
-                            </div>
-                         </div>`)
+        </div>`)
+        }
 
-        }*/
     })
-   /* let submit=$('#submit')
-    forms.on('click',submit,(()=>{
-        console.log("submit")
+
+
+
+
+
+    addUser=function(id)
+    {
         let name=$('#name').val()
         let dob=$('#dob').val()
         let secret=$('#secret').val()
@@ -153,70 +157,156 @@ $(function(){
         let collDep=$('#collDep').val()
         if(!name||!dob||!secret||!role||!password||!role||!cpassword||!collDep)
         {
-            console.log("blank data are not allowed")
+            $.toast({
+                textColor:"red",
+                loaderBg:'#fc4f4f',
+                heading:"Warning",
+                text:"All fields are mandatory",
+                bgColor:"warning",
+                hideAfter:5000,
+                showHideTransition:"fade",
+                icon:"error",
+                position:"top-right",           /*position is not accurate*/
+                stack:2
+            })
         }
-        else{
-            if(password!==cpassword)
-            {
-                console.log("password is not correct")
+        else if(password!==cpassword)
+        {
+            $.toast({
+                textColor:"red",
+                loaderBg:'#fc4f4f',
+                heading:"Warning",
+                text:"Password and Confirm Password must be same",
+                bgColor:"warning",
+                hideAfter:5000,
+                showHideTransition:"fade",
+                icon:"error",
+                position:"top-right",
+                stack:2
+            })
+        }
+        else {
+            let value={
+                name:name,
+                dob:dob,
+                secret:secret,
+                role:role,
+                password:password,
+                collDep:collDep
             }
-        }
-        let value={
-            name:name,
-            dob:dob,
-            secret:secret,
-            role:role,
-            password:password,
-            collDep:collDep
-        }
-        console.log(value)
-        $.ajax({
-            type:"POST",
-            url:"/auth/signup",
-            data:value,
-            success:(data)=>{
-                if(data)
-                {
-                    abc.empty().append(`
-<div class="bg-white offset-2">
+            $.ajax({
+                type:"POST",
+                url:"/api/v1/admin/addUser",
+                data:value,
+                success:(data)=> {
+                    console.log("useradded")
+                    forms.empty().append(`
+                                            <div class="bg-light offset-2">
 
-    <div class="row mt-5 py-5">
-        <div class="col ">
-            <h2 class="h2 text-center text-primary " > User Added</h2>
-
-        </div>
-    </div>
-</div>
-                        `)
-
+                                                    <div class="row mt-5 py-5">
+                                                            <div class="col ">
+                                                                <h2 class="h2 text-center text-success " > User Added</h2>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                        `)
                 }
-            }
-        })
+            }).fail((err)=>{
+                console.log(err)
+                $.toast({
+                    textColor:"red",
+                    loaderBg:'#fc4f4f',
+                    heading:"Warning",
+                    text:"Cannot add the user right now",
+                    hideAfter:5000,
+                    showHideTransition:"fade",
+                    icon:"error",
+                    position:"top-right",
+                    stack:2
+                })
+                console.log(err)
+            })
+        }
 
-    }))*/
-    window.xyz=function(e){
-        let depot=$('#clgDpt').val()
+    }
+    addClgDpt=function(e){
+        let clgDpt=$('#clgDpt').val()
+        let subUrl
+        if(!clgDpt)
+        {
+            $.toast({
+                textColor:"red",
+                loaderBg:'#fc4f4f',
+                text:"Invalid Value",
+                hideAfter:5000,
+                showHideTransition:"fade",
+                icon:"error",
+                position:"top-right",
+                stack:2
+            })
+        }
+        else {
+            if(e==='College')
+            {
+                subUrl='college/addCollege'
+                console.log(e)
+            }
+            else
+            {
+                subUrl='depot/addDepot'
+            }
+            console.log(clgDpt);
+            $.ajax({
+                url:`/api/v1/${subUrl}`,
+                method:"POST",
+                data:clgDpt,
+                success:((data)=>{
+
+                    forms.empty().append(`
+                                            <div class="bg-light offset-2">
+
+                                                    <div class="row mt-5 py-5">
+                                                            <div class="col ">
+                                                                <h2 class="h2 text-center text-success " > College/Depot Added</h2>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                        `)
+
+                })
+
+            }).fail(()=>{
+                console.log("oopsss")
+                $.toast({
+                    textColor:"red",
+                    loaderBg:'#fc4f4f',
+                    text:"Invalid Value",
+                    hideAfter:5000,
+                    showHideTransition:"fade",
+                    icon:"error",
+                    position:"top-right",
+                    stack:2
+                })
+            })
+        }
+    }
+    window.clickFun=function(e){
+
         console.log("ih")
         let subUrl
-        if(e==='addCollege')
+        if(e==='College'||e==='Depot')
         {
-            subUrl='college/addCollege'
+            addClgDpt(e)
         }
-        else
+        else if(e==='Transport Head'||e==='Depot Manager')
         {
-            subUrl='depot/addDepot'
+            subUrl=''
+            console.log(e);
+            addUser(e)
         }
-        console.log(depot);
-        $.ajax({
-            url:`/api/v1/${subUrl}`,
-            method:"POST",
-            data:depot,
-            success:((data)=>{
-                console.log("yeh")
-            })
+        else {
+            console.log("Invalid Request")
+        }
 
-        }).fail(()=>{
-            console.log("oopsss")
-        })
     }
 })

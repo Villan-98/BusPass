@@ -6,11 +6,11 @@ route.get('/',(req,res)=>{
         {
             res.redirect('/admin')
         }
-        else if(req.user.role==='transportHead')
+        else if(req.user.role==='Transport Head')
         {
             res.redirect('/transport')
         }
-        else if(req.user.role==='depotManager')
+        else if(req.user.role==='Depot Manager')
         {
             res.redirect('/manager')
         }
