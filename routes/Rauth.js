@@ -5,7 +5,7 @@ route.get('/signin',(req,res)=>{
     res.render('signin')
 })
 route.post('/signin',passport.authenticate('local',{
-    successRedirect:'../api/v1/user',
+    successRedirect:'../api/v1/user/determineRole',
     failureRedirect:'../auth/signin'
 }))
 route.get('/signup',(req,res)=>{

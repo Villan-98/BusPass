@@ -22,10 +22,14 @@ const user=db.define('user',{
     role:{
         allowNull:false,
         type:dt.STRING,
-        defaultValue:"admin"
+    },
+    clgDep:{
+        allowNull:false,
+        type:dt.STRING,
+
     }
 })
-const college=db.define('college',{
+const depot=db.define('Depot',{
     id:{
         allowNull:false,
         type:dt.INTEGER,
@@ -37,9 +41,8 @@ const college=db.define('college',{
         type:dt.STRING
     }
 })
-const busDepot=db.define('busDepot',{
+const college=db.define('college',{
     id:{
-        allowNull:false,
         type:dt.INTEGER,
         autoIncrement:true,
         primaryKey:true
@@ -110,12 +113,14 @@ const application=db.define('application',{
         type:dt.STRING
     }
 })
+//college.hasMany(user)
+//depot.hasMany(user)
 db.sync({
     //alter:true
     //force:true
 }).then(()=>{
-    console.log("dc sync")
+    console.log("db sync")
 })
 module.exports={
-    db,user,application,busDepot,college
+    db,user,application,depot,college
 }

@@ -1,5 +1,6 @@
 const route=require('express').Router()
-route.get('/',(req,res)=>{
+const ctrlUser=require('../../controllers/user')
+route.get('/determineRole',(req,res)=>{
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')
@@ -14,6 +15,40 @@ route.get('/',(req,res)=>{
         {
             res.redirect('/manager')
         }
+    }
+})
+route.get('/',(req,res)=>{
+    console.log("request")
+    if(req.isAuthenticated())
+    {
+        console.log(req.user)
+        if(req.user.role ==='admin')
+        {
+            ctrlUser.userByCat(req.query)
+                .then((data)=>{
+                    res.status(200).send({
+                        data:data
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                res.status(500).send({
+                    success:false,
+                    message:"Internal Server Error",
+                    code:"500"
+                })
+
+            })
+        }
+        else {
+            res.status(401).send({
+                success:false,
+                message:"Bad Request",
+                code:"401"
+            })
+        }
+    }
+    else {
+        res.redirect('/auth/signin')
     }
 })
 module.exports=route

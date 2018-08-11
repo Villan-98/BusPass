@@ -40,35 +40,41 @@ let forms=$('#forms')
         }
         if(aName === 'navDepot'||aName==='navTransport')
         {
-            let label,selectList
+            let label,selectLabel
             if(aName==='navTransport')
             {
-
                 label = 'Transport Head'
-
-
-                selectList=`
-                            <label class="" for="collDep">Select College</label>
-                            <select class="form-control" id="collDep" name="collDep">
-                                <option>Select College</option>
-                                <option>Delhi Technologial University</option>
-                                <option>Netaji Subhas Institute of Technology</option>
-                                <option>Delhi Institute of Tool Engineering</option>
-                            </select>`
+                selectLabel='College'
+                $.get({
+                    url:'../api/v1/college/allColleges'
+                })
+                    .then((collegeData)=>{
+                        const colleges=collegeData.data
+                        const $depot=$('#collDep')
+                        colleges.forEach((college)=>{
+                            $depot.append(`<option value=${college.name}>${college.name}</option>`)
+                        })
+                    }).catch((err)=>{
+                    console.log(err)
+                })
             }
             else if(aName==='navDepot')
             {
                 label = 'Depot Manager'
+                selectLabel="Depot"
 
-                selectList=` <label  for="collDep">Select Your Depot</label>
-                            <select class="form-control" id="collDep" name="collDep">
-                                <option>Select Bus Depot</option>
-                                <option>Bawana</option>
-                                <option>Keshopur Depot</option>
-                                <option>Rohini Depot-2 </option>
-                                <option>Nangloi</option>
-                                <option>Peera Garhi</option>
-                            </select>`
+                $.get({
+                    url:'../api/v1/depot/allDepot'
+                })
+                    .then((depotData)=>{
+                        const depots=depotData.data
+                        const $depot=$('#collDep')
+                        depots.forEach((depot)=>{
+                            $depot.append(`<option value=${depot.name}>${depot.name}</option>`)
+                        })
+                    }).catch((err)=>{
+                    console.log(err)
+                })
             }
           $('#forms').empty().append(`
           <div class="row mt-5  ">
@@ -125,7 +131,11 @@ let forms=$('#forms')
                     </div>
                     <div class="col-md-5 offset-1">
                         <div class="form-group">
-                            ${selectList}
+                            
+                            <label class="" for="collDep">Select ${selectLabel}</label>
+                            <select class="form-control" id="collDep" name="collDep">
+                                
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -156,7 +166,7 @@ let forms=$('#forms')
         let password=$('#password').val()
         let cpassword=$('#cpassword').val()
         let collDep=$('#collDep').val()
-        if(!name||!dob||!secret||!role||!password||!role||!cpassword||!collDep)
+        if(!name||!dob||!secret||!role||!password||!cpassword||!collDep)
         {
             $.toast({
                 textColor:"red",

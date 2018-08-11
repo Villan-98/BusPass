@@ -3,9 +3,7 @@ const route=require('express').Router()
 const passport=require('../../passport')
 const ctrlUser=require('../../controllers/user')
 const config=require('../../config')
-route.get('/',(req,res)=>{
-    res.send("hi")
-})
+
 route.post('/addUser',(req,res)=>{
     if(req.isAuthenticated())
     {
@@ -20,6 +18,7 @@ route.post('/addUser',(req,res)=>{
                             success:true
                         })
                     }).catch((err)=>{
+                        console.log(err)
                     res.status(500).send({
                         success:false,
                         code:"500",
