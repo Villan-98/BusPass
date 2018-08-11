@@ -23,7 +23,15 @@ function getStatus(data){
         }
     })
 }
+function applicationByCat(data){
+    return application.findAll({
+        where:{
+            institute:data.clgDep
+        }
+    })
+}
 module.exports={
     newApplication:newApplication,
-    getStatus:getStatus
+    getStatus:getStatus,
+    applicationByCat:applicationByCat
 }

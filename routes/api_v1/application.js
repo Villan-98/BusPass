@@ -10,6 +10,7 @@ function fileFilter(file,cb){
     const mimetype=filetype.test(file.mimetype)
     if(mimetype&&extname)
     {
+
         cb(null,true)
     }
     else{
@@ -18,7 +19,35 @@ function fileFilter(file,cb){
 
 }
 route.get('/',(req,res)=>{
-    res.send("done");
+    if(req.isAuthenticated())
+    {
+        req['query']={
+            clgDep:req.user.clgDep
+        }
+        application.applicationByCat(req.query)
+            .then((data)=>{
+                res.status(200).send({
+                    success:true,
+                    code:200,
+                    data:data
+                })
+            })
+            .catch((err)=>{
+                console.log(err)
+                res.status(500).send({
+                    success:false,
+                    code:500,
+                    message:"Bad Request"
+                })
+            })
+    }
+    else{
+        res.status(401).send({
+            message:"Unautorize access",
+            code:"401",
+            success:false
+        })
+    }
 })
 route.post('/',upload.array('photo',3),(r,s)=>{
 

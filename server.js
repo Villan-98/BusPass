@@ -45,14 +45,21 @@ app.use('/admin',(req,res,next)=>{
     }
 })
 
-app.use('/user/transport/',(req,res,next)=>{
+app.use('/user/',(req,res,next)=>{
 
     if(req.isAuthenticated())
     {
-        if(req.user.role==='transportHead'||req.user.role==='depotManager')
+        if(req.user.role==='Transport Head'||req.user.role==='Depot Manager')
         {
             console.log("done")
             next()
+        }
+        else {
+            res.status(401).send({
+                code:"401",
+                success:false,
+                message:"Bad Request"
+            })
         }
     }
     else{
@@ -61,21 +68,6 @@ app.use('/user/transport/',(req,res,next)=>{
     }
 })
 
-app.use('/user/depotManager/',(req,res,next)=>{
-
-    if(req.isAuthenticated())
-    {
-        if(req.user.role==='depotManager')
-        {
-            console.log("done")
-            next()
-        }
-    }
-    else{
-        console.log("wrong user")
-        res.redirect('/auth/signin')
-    }
-})
 //some static files//
 app.use('/bowerComponents',express.static(__dirname+'/bower_components'))
 app.use('/',express.static(__dirname+'/public_html/home'))

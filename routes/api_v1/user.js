@@ -1,6 +1,7 @@
 const route=require('express').Router()
 const ctrlUser=require('../../controllers/user')
 route.get('/determineRole',(req,res)=>{
+    console.log("request in the determine role")
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')
@@ -9,11 +10,12 @@ route.get('/determineRole',(req,res)=>{
         }
         else if(req.user.role==='Transport Head')
         {
-            res.redirect('/transport')
+            res.redirect('/user/transportHead')
         }
         else if(req.user.role==='Depot Manager')
         {
-            res.redirect('/manager')
+            console.log("request in the depot manager")
+            res.redirect('/user/depotManager')
         }
     }
 })
