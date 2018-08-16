@@ -130,11 +130,21 @@ route.post('/',upload.array('photo',3),(r,s)=>{
     }
     application.newApplication(r.body)
         .then(()=>{
-            s.render('success')
+            application.getStatus(r.body)
+                .then((data)=>{
+                    s.status(201).json({
+                        success:true,
+                        code:201,
+                        data:data
+                    })
+                })
         })
         .catch((err)=>{
-            console.log(err)
-            s.send("not done")
+            s.status(400).json({
+                success:false,
+                code:400,
+                err:"Application not submitted"
+            })
         })
 
 

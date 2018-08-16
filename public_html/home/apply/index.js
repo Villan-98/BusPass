@@ -39,7 +39,8 @@ $(function(){
                 url:"/api/v1/apply",
                 type:"POST",
                 data:data,
-                success:function() {
+                success:function(data) {
+                    console.log(data)
                     container.empty().append(`
 <div class="bg-white offset-2">
 
@@ -57,6 +58,9 @@ $(function(){
 
                         `)
 
+                },
+                error:function(){
+                    console.log("oopsfsdjfklsjfdsklj")
                 }
             })
         }
