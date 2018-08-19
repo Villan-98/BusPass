@@ -8,14 +8,34 @@ let forms=$('#forms')
     anchor.click((e)=> {
         let aName = (e.target).getAttribute('id')
         if (aName === 'navAddClg' || aName === 'navAddDpt') {
-            let ID, label,role,selectList
+            let ID, label,role,selectList,dropdown
             if (aName === 'navAddClg')
             {
                 label = 'College'
+                const dpt4clg=$('#dpt4clg')
+                $.get('/api/v1/depot/allDepot')
+                    .then((data)=>{
+                        let depots=data.data;
+                        console.log(depots)
+                        depots.forEach((depot)=>{
+                            console.log(depot.name)     //no output on front end?
+                            dpt4clg.append(`<option value="${depot.name}">${depot.name}</option>`)
+                        })
+
+                    })
+                dropdown=` 
+                        <div class="form-group">
+                            <label for="dpt4clg">Enter the Depot Name</label>
+                            <select class="form-control" id="dpt4clg" name="clg4dpt">
+                            
+                            </select>
+                        </div>`
+
             }
             else if(aName==='navAddDpt')
             {
                 label = 'Depot'
+                dropdown=``
             }
 
             $('#forms').empty().append(`
@@ -27,11 +47,22 @@ let forms=$('#forms')
                                            </div>
                                         <div class="row bg-light pb-3">
                                             <div class="col-5 offset-3">
-                                                <div class="form-group">
-                                                <label for="clgDept">Enter the ${label} Name</label>
-                                                     <input type="text"class="form-control" id="clgDpt">
+                                            <div class="row">
+                                                <div class="col">
+                                                     <div class="form-group">
+                                                        <label for="clgDept">Enter the ${label} Name</label>
+                                                        <input type="text"class="form-control" id="clgDpt">
+                                                      </div>
                                                 </div>
+                                             </div>
+                                              <div class="row">
+                                                <div class="col">
+                                                ${dropdown} 
+                                                </div>
+                                              </div>  
+                                            
                                             </div>
+                                            
                                             <div class="col-12 text-center">
                                             <button class="btn btn-primary" id=${label} onclick="clickFun(id)">ADD</button>
 </div>

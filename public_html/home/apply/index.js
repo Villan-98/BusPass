@@ -1,7 +1,20 @@
 $(function(){
+    console.log("connect")
     let submit=$('#btnSubmit')
     let api='/api/v1'
+    $.get('/api/v1/college/allColleges')
+        .then((data)=>{
+            console.log(data)
+            let colleges=data.data
+            colleges.forEach((college)=>{
+                $('#institute').append(`<option value="${college.name}">${college.name}</option>`)
+            })
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     submit.click(function(){
+
         console.log("button clicked")
         let name=$('#name').val()
         let age=$('#age').val()
