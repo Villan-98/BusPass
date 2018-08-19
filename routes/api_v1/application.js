@@ -3,6 +3,7 @@ const multer=require('multer')
 const fs=require('fs')
 const path=require('path')
 var upload=multer({dest:'upload'})
+var pdfDocument=require('pdfkit')
 const application=require('../../controllers/application')
 function fileFilter(file,cb){
     let filetype=/png|jpg|jpeg/
@@ -132,11 +133,31 @@ route.post('/',upload.array('photo',3),(r,s)=>{
         .then(()=>{
             application.getStatus(r.body)
                 .then((data)=>{
-                    s.status(201).json({
+                    var doc=new pdfDocument()
+                    var name=data.name
+                    var college=data.college
+                    var roolNo=data.id
+                    let a="ghl.pdf"
+                    s.setHeader('Content-disposition', 'attachment; filename="' +a + '"');
+
+                    s.setHeader('Content-type', 'application/pdf');
+
+                    /*s.status(201).json({
                         success:true,
                         code:201,
                         data:data
-                    })
+                    })*/
+                    doc.fontSize(15)
+                        .fillColor('blue')
+                        .text('Read Full Article', 100, 100)
+
+
+                    doc.moveDown()
+                        .fillColor('red')
+                        .text("name: "+name);
+                    doc.pipe(s)
+                    doc.end()
+
                 })
         })
         .catch((err)=>{
@@ -149,6 +170,76 @@ route.post('/',upload.array('photo',3),(r,s)=>{
 
 
     })
+route.get('/pdf',(r,s)=>{
+    let data={
+        id:32
+    }
+    application.getStatus(data)
+        .then((data)=>{
+
+            const doc=new pdfDocument()
+            doc.font('Times-Roman',18)
+                .fontSize(25)
+                .text("Registration form of Bus Pass",{align:'center'})
+
+            doc.moveTo(20,110)
+                .lineTo(590,110)
+                .stroke()
+            doc.moveDown()
+
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("Father's Name:"+data.fatherName,{align:'left'})
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text(
+                    "Name:"+data.name,{align:'left'})
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("Id:"+data.id,{align:'left'})
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("College:"+data.institute)
+            doc.fontSize(16)
+                .font('Times-Roman',18,100)
+                .text("  Course:"+data.course,{
+                    align:'left'
+                })
+
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("Age:"+data.age)
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("Pass Category:Student")
+
+            doc.moveDown()
+            doc.font('Times-Roman',18,100)
+                .fontSize(16)
+                .text("Email Id:"+data.email)
+            doc.text("Amount Paid: 515 Rupee")
+            doc.fontSize(10)
+                .fillColor('blue')
+                .text("You can check the status of your application at:http://localhost:2500/status",{
+                link:"http:localhost:2500/status"       /*a bit of hard code here*/
+
+            })
+
+            let a="abc.pdf"
+            s.setHeader('Content-disposition', 'attachment; filename="' +a + '"');
+
+            s.setHeader('Content-type', 'application/pdf');
+            doc.pipe(s)
+            doc.end()
+        })
+
+
+})
 route.get('/status',(r,s)=>{
     console.log("request has came")
     console.log(r.params)
