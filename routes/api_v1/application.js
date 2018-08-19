@@ -133,30 +133,11 @@ route.post('/',upload.array('photo',3),(r,s)=>{
         .then(()=>{
             application.getStatus(r.body)
                 .then((data)=>{
-                    var doc=new pdfDocument()
-                    var name=data.name
-                    var college=data.college
-                    var roolNo=data.id
-                    let a="ghl.pdf"
-                    s.setHeader('Content-disposition', 'attachment; filename="' +a + '"');
-
-                    s.setHeader('Content-type', 'application/pdf');
-
-                    /*s.status(201).json({
+                    s.status(201).send({
                         success:true,
-                        code:201,
-                        data:data
-                    })*/
-                    doc.fontSize(15)
-                        .fillColor('blue')
-                        .text('Read Full Article', 100, 100)
-
-
-                    doc.moveDown()
-                        .fillColor('red')
-                        .text("name: "+name);
-                    doc.pipe(s)
-                    doc.end()
+                        data:data,
+                        code:201
+                    })
 
                 })
         })
