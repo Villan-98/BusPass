@@ -52,7 +52,7 @@ let forms=$('#forms')
                         const colleges=collegeData.data
                         const $depot=$('#collDep')
                         colleges.forEach((college)=>{
-                            $depot.append(`<option value=${college.name}>${college.name}</option>`)
+                            $depot.append(`<option value="${college.name}">${college.name}</option>`)
                         })
                     }).catch((err)=>{
                     console.log(err)
