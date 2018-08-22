@@ -115,6 +115,7 @@ const application=db.define('application',{
 })
 //college.hasMany(user)
 //depot.hasMany(user)
+depot.hasMany(college)
 db.sync({
     //alter:true
     //force:true

@@ -8,36 +8,12 @@ let forms=$('#forms')
     anchor.click((e)=> {
         let aName = (e.target).getAttribute('id')
         if (aName === 'navAddClg' || aName === 'navAddDpt') {
-            let ID, label,role,selectList,dropdown
-            if (aName === 'navAddClg')
-            {
-                label = 'College'
-                const dpt4clg=$('#dpt4clg')
-                $.get('/api/v1/depot/allDepot')
-                    .then((data)=>{
-                        let depots=data.data;
-                        console.log(depots)
-                        depots.forEach((depot)=>{
-                            console.log(depot.name)     //no output on front end?
-                            dpt4clg.append(`<option value="${depot.name}">${depot.name}</option>`)
-                        })
+            let  label='College'
 
-                    })
-                dropdown=` 
-                        <div class="form-group">
-                            <label for="dpt4clg">Enter the Depot Name</label>
-                            <select class="form-control" id="dpt4clg" name="clg4dpt">
-                            
-                            </select>
-                        </div>`
-
-            }
-            else if(aName==='navAddDpt')
+            if(aName==='navAddDpt')
             {
                 label = 'Depot'
-                dropdown=``
             }
-
             $('#forms').empty().append(`
                                           <div class="row mt-5 bg-light">
                                           <div class="col-12 my-5">
@@ -56,8 +32,8 @@ let forms=$('#forms')
                                                 </div>
                                              </div>
                                               <div class="row">
-                                                <div class="col">
-                                                ${dropdown} 
+                                                <div class="col" id="divDpt4clg">
+                                               
                                                 </div>
                                               </div>  
                                             
@@ -65,8 +41,34 @@ let forms=$('#forms')
                                             
                                             <div class="col-12 text-center">
                                             <button class="btn btn-primary" id=${label} onclick="clickFun(id)">ADD</button>
-</div>
+                                            </div>
                                         </div>`)
+            if (aName === 'navAddClg')
+            {
+                label = 'College'
+
+                $.get('/api/v1/depot/allDepot')
+                    .then((data)=>{
+                        let depots=data.data;
+                        console.log(depots)
+                        $('#divDpt4clg').empty().append(`
+
+                        <div class="form-group">
+                            <label for="dpt4clg">Enter the Depot Name</label>
+                            <select class="form-control" id="dpt4clg" name="dpt4clg"></select>
+                         </div>
+                        `)
+
+                        let dpt4clg=$('#dpt4clg')
+                        depots.forEach((depot)=>{
+                            console.log(depot.name)     //no output on front end?
+                            dpt4clg.append(`<option value="${depot.name}">${depot.name}</option>`)
+                        })
+
+                    })
+
+            }
+
 
         }
         if(aName === 'navDepot'||aName==='navTransport')
@@ -100,6 +102,7 @@ let forms=$('#forms')
                     .then((depotData)=>{
                         const depots=depotData.data
                         const $depot=$('#collDep')
+                        console.log($depot.html())
                         depots.forEach((depot)=>{
                             $depot.append(`<option value=${depot.name}>${depot.name}</option>`)
                         })
@@ -275,7 +278,8 @@ let forms=$('#forms')
         let clgDpt=$('#clgDpt').val()
         let subUrl
         let value={
-            name:$('#clgDpt').val()
+            name:$('#clgDpt').val(),
+            depot:$('#dpt4clg').val()
         }
         if(!clgDpt)
         {

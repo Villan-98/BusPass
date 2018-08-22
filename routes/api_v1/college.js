@@ -26,20 +26,30 @@ route.post('/addCollege',(req,res)=>{
     {
         if(req.user.role==='admin')
         {
-            ctrlCollege.insertCollege(req.body)
-                .then(()=>{
-                    res.status(201).send({
-                        success:true,
-                        code:"201",
-                    })
+            console.log(req.body)
+           let  body={
+                dptName:req.body.depot
+            }
+            ctrlCollege.getOneDepot(body)
+                .then((data)=> {
+                    console.log(data.id)
+                    req.body['dptId']=data.id
+                    ctrlCollege.insertCollege(req.body)
+                        .then(()=>{
+                            res.status(201).send({
+                                success:true,
+                                code:"201",
+                            })
+                        })
+                        .catch((err)=>{
+                            console.log(err)
+                            res.status(500).send({
+                                code:"500",
+                                message:"Internal Server Error"
+                            })
+                        })
                 })
-                .catch((err)=>{
-                    console.log(err)
-                    res.status(500).send({
-                        code:"500",
-                        message:"Internal Server Error"
-                    })
-                })
+
         }
         else {
             res.status(401).send({

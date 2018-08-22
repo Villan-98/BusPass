@@ -4,7 +4,8 @@ const depot=require('../db/models').depot
 module.exports={
     insertCollege:async(requery)=>{
        return college.create({
-            name:requery.name
+            name:requery.name,
+            DepotId:requery.dptId
         })
     },
     insertDepot:async(requery)=>{
@@ -24,6 +25,13 @@ module.exports={
         return depot.findAll({
             attributes:['name','id'],
             order:[['name']],
+        })
+    },
+    getOneDepot:async(requery)=>{
+        return depot.findOne({
+            where:{
+                name:requery.dptName
+            }
         })
     }
 }
