@@ -49,4 +49,43 @@ route.post('/addDepot',(req,res)=>{
         res.redirect('./auth/signin')
     }
 })
+route.delete('/:id',(req,res)=>{
+    if(req.isAuthenticated())
+    {
+        if(req.user.role==='admin')
+        {
+            console.log("reached")
+            ctrlDepot.deleteDepot(req.params)
+                .then(()=>{
+                    ctrlDepot.getAllDepot()
+                        .then((data)=>{
+                            res.status(200).send({
+                                success:true,
+                                code:204,
+                                message:"Depot deleted successfully",
+                                data:data
+                            })
+                        })
+                        .catch((err)=>{
+                            res.status(504).send({
+                                success:false,
+                                message:"Internal Server Error",
+                                code:504
+                            })
+                        })
+
+                })
+        }
+        else {
+            res.status(401).send({
+                code:401,
+                success:false,
+                message:"Bad Request"
+            })
+        }
+    }
+    else{
+        res.redirect('/auth/signin')
+    }
+})
 module.exports=route

@@ -1,3 +1,4 @@
+/* Created by Villan-98 on 22/08/2018*/
 $(function(){
     console.log("connected")
     const anchor=$('a')
@@ -56,27 +57,79 @@ $(function(){
             })
 
         }
+        if($navId==='navDptDetail')
+        {
+            $('#headDiv').show()
+            $('#headDiv').addClass('offset-lg-2 col-lg-8 col-md-12 mt-5')
+            $('#topHeading').empty().append('Registered Depot')
+            $('#forms').empty().append(`
+                            <div class="row ">
+                                <div class="col-lg-8 offset-lg-2">
+                                     <ul class="list-group " id="dptList">
+                                        <li class="list-group-item bg-dark ">
+                                            <div class=" mx-1 row py-2  text-white">
+                                                <div class="col-4">
+                                                    Depot Name
+                                                </div>
+                                                <div class="col-lg-4 pl-md-5 col-md-5 text-center offset-lg-1">
+                                                     Depot Manager Name
+                                                </div>
+                                                <div class="col-1   offset-1">
+                                                       Delete
+                                                </div>
+                                            </div>
+                                        </li>
+                                     </ul>
+                            </div>
+                        `)
+            $.get({
+                url:'../api/v1/depot/allDepot'
+            })
+                .then((data)=>{
+                    console.log(data.data)
+                    let depot=data.data
+
+                    depot.forEach((depot)=>{$('#dptList').append(`
+                    <li href="#" class="list-group-item  px-3">
+                    <div class="row">
+                         <div class="px-3 offset-1 col-4">
+                            ${depot.name}
+                         </div>
+                         <div class="px-3 offset-1 col-4">
+                            ${depot.name}
+                         </div>
+                         <div class="text-danger text-center" id="${depot.id}" onclick="deleteDepot(id)">
+                         X
+                         </div>
+                    </div>
+                    </li>`)
+                    })
+                }).catch((err)=>{
+                console.log(err)
+            })
+
+        }
     })
     //some onclick functions
-    window.deleteCollege=function(id){
+    window.deleteDepot=function(id){
         $.ajax({
-            url:`../api/v1/college/${id}`,
+            url:`../api/v1/depot/${id}`,
             type:'DELETE',
             body:{
                 id:id
             },
             success:function(data){
-                console.log(data.data)
-                $('#clgList').empty()
-                let colleges=data.data
-                colleges.forEach((college)=>{
-                    $('#clgList').append(`
+                console.log(data)
+                $('#dptList').empty()
+                let depot=data.data
+                depot.forEach((depot)=>{
+                    $('#dptList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
                          <div class="px-3 offset-1 col-8">
-                            ${college.name}
+                            ${depot.name}
                          </div>
-                         <div class="float-right text-danger" id="${college.id}" onclick="deleteCollege(id)">
+                         <div class="float-right text-danger" id="${depot.id}" onclick="deleteDepot(id)">
                          X
                          </div>
                     </div>
@@ -84,6 +137,9 @@ $(function(){
      
                     `)
                 })
+            },
+            error:function(){
+                console.log("OOPS")
             }
         })
     }

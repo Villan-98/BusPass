@@ -1,6 +1,8 @@
 /* Created by Villan on 06/08/2018*/
+const db=require('../db/models').db
 const college=require('../db/models').college
 const depot=require('../db/models').depot
+const user=require('../db/models').user
 module.exports={
     insertCollege:async(requery)=>{
        return college.create({
@@ -44,5 +46,28 @@ module.exports={
                 name:requery.dptName
             }
         })
+    },
+    deleteDepot:async(requery)=>{
+        return db.transaction((t)=>{
+            return college.destroy({
+                where:{
+                    DepotId:requery.id
+                }
+            },{transaction:t}).then(()=>{
+                return user.destroy({
+                    where:{
+                        DepotId:requery.id
+                    }
+                },{transaction:t}).then(()=>{
+                    return depot.destroy({
+                        where:{
+                            id:requery.id
+                        }
+                    })
+                })
+            })
+        })
+
+
     }
 }
