@@ -4,6 +4,14 @@ const passport=require('../passport/index')
 route.get('/signin',(req,res)=>{
     res.render('signin')
 })
+route.get('/signout',(req,res)=>{
+    req.user=null
+    req.logout()
+    req.session.destroy((err)=>{
+        res.redirect('/auth/signin')
+    })
+
+})
 route.post('/signin',passport.authenticate('local',{
     successRedirect:'../api/v1/user/determineRole',
     failureRedirect:'../auth/signin'

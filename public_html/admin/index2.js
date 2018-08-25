@@ -5,6 +5,7 @@ $(function(){
         const $navId=e.target.getAttribute('id')
         if($navId==='navClgDetail')
         {
+            $('#headDiv').show()
             $('#headDiv').addClass('offset-2 col-8 mt-5')
             $('#topHeading').empty().append('Registered Colleges')
             $('#forms').empty().append(`
