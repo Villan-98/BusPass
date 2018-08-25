@@ -38,6 +38,12 @@ module.exports={
         return depot.findAll({
             attributes:['name','id'],
             order:[['name']],
+            include:[
+                {
+                    model:user,
+                    attributes:['userName','id']
+                }
+            ]
         })
     },
     getOneDepot:async(requery)=>{

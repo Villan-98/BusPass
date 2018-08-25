@@ -34,9 +34,7 @@ $(function(){
                 url:'../api/v1/college/allColleges'
             })
                 .then((data)=>{
-                    console.log(data.data)
                     let colleges=data.data
-
                     colleges.forEach((college)=>{$('#clgList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
@@ -88,15 +86,24 @@ $(function(){
                 .then((data)=>{
                     console.log(data.data)
                     let depot=data.data
+                    let ManagerName
 
-                    depot.forEach((depot)=>{$('#dptList').append(`
+                    depot.forEach((depot)=>{
+                        if(depot.users.length===0)
+                        {
+                            ManagerName='--'
+                        }
+                        else {
+                            ManagerName=depot.users[0].userName
+                        }
+                        $('#dptList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
                          <div class="px-3 offset-1 col-4">
                             ${depot.name}
                          </div>
                          <div class="px-3 offset-1 col-4">
-                            ${depot.name}
+                            ${ManagerName}
                          </div>
                          <div class="text-danger text-center" id="${depot.id}" onclick="deleteDepot(id)">
                          X
@@ -121,7 +128,6 @@ $(function(){
                     id:id
                 },
                 success:function(data){
-                    console.log(data.data)
                     $('#clgList').empty()
                     let colleges=data.data
                     colleges.forEach((college)=>{
@@ -151,7 +157,6 @@ $(function(){
 
         if(confirm("Deleting depot may result in deletion of all Depot manager and colleges associated with it"))
         {
-            console.log("confirmed")
             $.ajax({
                 url:`../api/v1/depot/${id}`,
                 type:'DELETE',
@@ -159,15 +164,25 @@ $(function(){
                     id:id
                 },
                 success:function(data){
-                    console.log(data)
                     $('#dptList').empty()
                     let depot=data.data
                     depot.forEach((depot)=>{
+                        let ManagerName
+                        if(depot.users.length===0)
+                        {
+                            ManagerName='None'
+                        }
+                        else {
+                            ManagerName=depot.users[0].userName
+                        }
                         $('#dptList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
-                         <div class="px-3 offset-1 col-8">
+                         <div class="px-3 offset-1 col-4">
                             ${depot.name}
+                         </div>
+                         <div class="px-3 offset-1 col-4">
+                            ${ManagerName}
                          </div>
                          <div class="float-right text-danger" id="${depot.id}" onclick="deleteDepot(id)">
                          X
