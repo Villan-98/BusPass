@@ -25,6 +25,10 @@ module.exports={
        return college.findAll({
            attributes:['name','id'],
            order:[['name']],
+           include:[{
+               model:depot,
+               attributes:['name']
+           }]
 
        })
     },

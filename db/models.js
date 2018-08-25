@@ -113,6 +113,7 @@ const application=db.define('application',{
 application.belongsTo(college)
 depot.hasMany(user)
 depot.hasMany(college)
+college.belongsTo(depot)
 db.sync({
    // alter:true
    // force:true
