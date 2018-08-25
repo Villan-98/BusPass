@@ -111,19 +111,59 @@ $(function(){
         }
     })
     //some onclick functions
+    window.deleteCollege=function(id){
+        if(confirm(" Deletion of College may result in deletion of all data associated with it"))
+        {
+            $.ajax({
+                url:`../api/v1/college/${id}`,
+                type:'DELETE',
+                body:{
+                    id:id
+                },
+                success:function(data){
+                    console.log(data.data)
+                    $('#clgList').empty()
+                    let colleges=data.data
+                    colleges.forEach((college)=>{
+                        $('#clgList').append(`
+                            <li href="#" class="list-group-item  px-3">
+                            <div class="row">
+                            <div class="px-3 offset-1 col-8">
+                            ${college.name}
+                            </div>
+                            <div class="float-right text-danger" id="${college.id}" onclick="deleteCollege(id)">
+                            X
+                            </div>
+                            </div>
+                            </li>
+
+                                `)
+                    })
+                },
+                error:function(){
+                    console.log("OOPS")
+                }
+            })
+        }
+
+    }
     window.deleteDepot=function(id){
-        $.ajax({
-            url:`../api/v1/depot/${id}`,
-            type:'DELETE',
-            body:{
-                id:id
-            },
-            success:function(data){
-                console.log(data)
-                $('#dptList').empty()
-                let depot=data.data
-                depot.forEach((depot)=>{
-                    $('#dptList').append(`
+
+        if(confirm("Deleting depot may result in deletion of all Depot manager and colleges associated with it"))
+        {
+            console.log("confirmed")
+            $.ajax({
+                url:`../api/v1/depot/${id}`,
+                type:'DELETE',
+                body:{
+                    id:id
+                },
+                success:function(data){
+                    console.log(data)
+                    $('#dptList').empty()
+                    let depot=data.data
+                    depot.forEach((depot)=>{
+                        $('#dptList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
                          <div class="px-3 offset-1 col-8">
@@ -136,12 +176,13 @@ $(function(){
                     </li>
      
                     `)
-                })
-            },
-            error:function(){
-                console.log("OOPS")
-            }
-        })
+                    })
+                },
+                error:function(){
+                    console.log("OOPS")
+                }
+            })
+        }
     }
 
 })
