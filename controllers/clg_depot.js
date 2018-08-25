@@ -8,6 +8,13 @@ module.exports={
             DepotId:requery.dptId
         })
     },
+    deleteCollege:async(requery)=>{
+      return college.destroy({
+          where:{
+              id:requery.id
+          }
+      })
+    },
     insertDepot:async(requery)=>{
         return depot.create({
             name:requery.name,

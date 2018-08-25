@@ -6,8 +6,10 @@ let anchor=$('a')
 let forms=$('#forms')
 /**some onclick function to be used by index.html**/
     anchor.click((e)=> {
+
         let aName = (e.target).getAttribute('id')
         if (aName === 'navAddClg' || aName === 'navAddDpt') {
+            $('#headDiv').hide()
             let  label='College'
 
             if(aName==='navAddDpt')
@@ -73,6 +75,7 @@ let forms=$('#forms')
         }
         if(aName === 'navDepot'||aName==='navTransport')
         {
+            $('#headDiv').hide()
             let label,selectLabel
             if(aName==='navTransport')
             {

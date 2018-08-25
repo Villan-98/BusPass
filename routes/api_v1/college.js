@@ -59,4 +59,30 @@ route.post('/addCollege',(req,res)=>{
         }
     }
 })
+
+route.delete('/:id',(req,res)=>{
+
+    console.log(req.params.id)
+    ctrlCollege.deleteCollege(req.params)
+        .then((data)=>{
+            console.log(data)
+            ctrlCollege.getAllCollege()
+                .then((data)=>{
+                 res.status(200).send({
+                     data:data,
+                     success:true,
+                     code:200
+                 })
+                })
+        })
+        .catch((err)=>{
+            console.log(err)
+            res.status(404).send({
+                success:false,
+                code:404,
+                message:"Internal Server Error"
+            })
+            }
+        )
+})
 module.exports=route
