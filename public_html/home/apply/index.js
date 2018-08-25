@@ -7,7 +7,7 @@ $(function(){
             console.log(data)
             let colleges=data.data
             colleges.forEach((college)=>{
-                $('#institute').append(`<option value="${college.name}">${college.name}</option>`)
+                $('#institute').append(`<option value="${college.id}">${college.name}</option>`)
             })
         })
         .catch((err)=>{

@@ -104,7 +104,7 @@ let forms=$('#forms')
                         const $depot=$('#collDep')
                         console.log($depot.html())
                         depots.forEach((depot)=>{
-                            $depot.append(`<option value=${depot.name}>${depot.name}</option>`)
+                            $depot.append(`<option value=${depot.id}>${depot.name}</option>`)
                         })
                     }).catch((err)=>{
                     console.log(err)

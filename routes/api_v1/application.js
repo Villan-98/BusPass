@@ -23,9 +23,9 @@ route.get('/',(req,res)=>{
     if(req.isAuthenticated())
     {
         req['query']={
-            clgDep:req.user.clgDep
+            depotId:req.user.DepotId
         }
-        application.applicationByCat(req.query)
+        application.applicationByDpt(req.query)
             .then((data)=>{
                 res.status(200).send({
                     success:true,

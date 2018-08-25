@@ -26,7 +26,6 @@ const user=db.define('user',{
     clgDep:{
         allowNull:false,
         type:dt.STRING,
-
     }
 })
 const depot=db.define('Depot',{
@@ -37,6 +36,7 @@ const depot=db.define('Depot',{
         primaryKey:true
     },
     name:{
+        primaryKey:true,
         allowNULL:false,
         type:dt.STRING
     }
@@ -79,10 +79,6 @@ const application=db.define('application',{
         type:dt.STRING,
         defaultValue:"student"
     },
-    institute:{
-        allowNull:false,
-        type:dt.STRING
-    },
     course:{
         allowNull:false,
         type:dt.STRING
@@ -114,11 +110,12 @@ const application=db.define('application',{
     }
 })
 //college.hasMany(user)
-//depot.hasMany(user)
+application.belongsTo(college)
+depot.hasMany(user)
 depot.hasMany(college)
 db.sync({
-    //alter:true
-    //force:true
+   // alter:true
+   // force:true
 }).then(()=>{
     console.log("db sync")
 })

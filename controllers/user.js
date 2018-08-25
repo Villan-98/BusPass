@@ -6,7 +6,8 @@ module.exports={
             userName:requery.name,
             password:requery.password,
             role:requery.role,
-            clgDep:requery.collDep
+            clgDep:requery.collDep,
+            DepotId:requery.collDep,
         })
     },
     userByCat:async(requery)=>{

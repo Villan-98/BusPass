@@ -1,11 +1,11 @@
 const db=require('../db/models').db
 const application=require('../db/models').application
+const college=require('../db/models').college
 function newApplication(data){
     return application.create({
         name:data.name,
         fatherName:data.fatherName,
         age:data.age,
-        institute:data.institute,
         course:data.course,
         year:data.year,
         address:data.address,
@@ -13,7 +13,8 @@ function newApplication(data){
         id:data.id,
         idCard:data.idCard,
         feeReceipt:data.feeReceipt,
-        paymentSs:data.paymentSs
+        paymentSs:data.paymentSs,
+        collegeId:data.institute
     })
 }
 function getStatus(data){
@@ -23,15 +24,18 @@ function getStatus(data){
         }
     })
 }
-function applicationByCat(data){
+function applicationByDpt(data){
     return application.findAll({
-        where:{
-            institute:data.clgDep
-        }
+        include:[{
+            model:college,
+            where:{
+                DepotId:data.depotId
+            }
+        }]
     })
 }
 module.exports={
     newApplication:newApplication,
     getStatus:getStatus,
-    applicationByCat:applicationByCat
+    applicationByDpt:applicationByDpt
 }
