@@ -7,6 +7,8 @@ $(function(){
         if($navId==='navClgDetail')
         {
             $('#headDiv').show()
+
+            $('#headDiv').removeClass('col-lg-9')
             $('#headDiv').addClass('offset-lg-2 col-lg-8 col-md-12 mt-5')
             $('#topHeading').empty().append('Registered Colleges')
             $('#forms').empty().append(`
@@ -58,6 +60,7 @@ $(function(){
         if($navId==='navDptDetail')
         {
             $('#headDiv').show()
+            $('#headDiv').removeClass('col-lg-9')
             $('#headDiv').addClass('offset-lg-2 col-lg-8 col-md-12 mt-5')
             $('#topHeading').empty().append('Registered Depot')
             $('#forms').empty().append(`
@@ -126,11 +129,7 @@ $(function(){
 
                     $('#headDiv').show()
                     $('#headDiv').addClass('offset-lg-2 col-lg-9 col-md-12 mt-5')
-                    $('#topHeading').empty().append(`Registered User
-                        
-                        
-                        
-                        `)
+                    $('#topHeading').empty().append(`Registered User`)
                     $('#forms').empty().append(`
                             <div class="row ">
                             <div class="col-lg-9 offset-lg-2">
