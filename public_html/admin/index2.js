@@ -126,7 +126,11 @@ $(function(){
 
                     $('#headDiv').show()
                     $('#headDiv').addClass('offset-lg-2 col-lg-9 col-md-12 mt-5')
-                    $('#topHeading').empty().append('Registered User')
+                    $('#topHeading').empty().append(`Registered User
+                        
+                        
+                        
+                        `)
                     $('#forms').empty().append(`
                             <div class="row ">
                             <div class="col-lg-9 offset-lg-2">
@@ -150,6 +154,22 @@ $(function(){
                                 </li>
                             </ul>
                             </div>
+                            <div>
+                        <span class="  h6">
+                        Filter
+                            </span>
+                            <ul class="list-group-item">
+                                <li class="list-group-item" id="radAll" onclick="filter(id)">
+                                All User
+                                </li>
+                                <li class="list-group-item"  id="radDepot" name="Depot Manager" onclick="filter(id)">
+                                Depot Manager
+                                </li>
+                                <li class="list-group-item"   id="radTrans" onclick="filter(id)">
+                                Transport Head
+                                </li>
+                            </ul>
+                        </div>
                         `)
                     users.forEach((user)=>{
                         console.log(user)
@@ -167,16 +187,98 @@ $(function(){
                             ${user.clgDep}
                          </div>
                          
-                         <div class="text-danger text-center" id="${user.id}" onclick="deleteDepot(id)">
+                         <div class="text-danger text-center" id="${user.id}" >
                             X
                          </div>
                     </div>
-                    </li>`)
+                    </li>
+`)
                     })
                 })
         }
     })
     //some onclick functions
+    window.filter=function(id){
+        let name
+        if(id==='radDepot')
+        {
+            name='Depot Manager'
+
+            console.log(name)
+            $.get(`/api/v1/user?user=${name}`)
+                .then((data)=>{
+                makeList(data)
+
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+        }
+        else if(id==='radTrans')
+        {
+            name='Transport Head'
+
+            console.log(name)
+            $.get(`/api/v1/user?user=${name}`)
+                .then((data)=>{
+
+                    makeList(data)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+        }
+        else if(id==='radAll')
+        {
+
+            $.get({
+                url:'../api/v1/user/allUser'
+            })
+                .then((data)=> {
+                    makeList(data)
+                })
+        }
+        let makeList=function(data){
+            users=data.data
+            $('#clgList').empty().append(` <li class="list-group-item bg-dark ">
+                                    <div class=" mx-1 row py-2  text-white">
+                                        <div class="pl-5 col-3 ">
+                                            User Name
+                                        </div>
+                                        <div class="col-3 pl-md-3  text-center ">
+                                            Role
+                                        </div>
+                                        <div class="col-2  ml-4 offset-1">
+                                            College/Depot
+                                        </div>
+                                        
+                                        <div class="col-2   offset-1">
+                                            Delete User
+                                        </div>
+                                    </div>
+                                </li>`)
+            users.forEach((user)=>{
+                $('#clgList').append(`<li href="#" class="list-group-item  px-3">
+                    <div class="row">
+                         <div class="px-3 offset-1 col-3">
+                            ${user.userName}
+                         </div>
+                         <div class="px-3  col-3">
+                            ${user.role}
+                         </div>
+                         <div class="px-3  col-3">
+                            ${user.clgDep}
+                         </div>
+                         
+                         <div class="text-danger text-center" id="${user.id}" >
+                            X
+                         </div>
+                    </div>
+                    </li>`)
+            })
+
+        }
+    }
     window.deleteCollege=function(id){
         if(confirm(" Deletion of College may result in deletion of all data associated with it"))
         {

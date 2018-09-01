@@ -13,7 +13,6 @@ module.exports={
     },
     userByCat:async(requery)=>{
         return User.findAll({
-            attributes:['userName','clgDep'],
             where:{
                 role:requery.user
             }

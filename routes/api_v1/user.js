@@ -26,7 +26,6 @@ route.get('/allUser',(req,res)=>{
         {
             ctrlUser.allUser()
                 .then((data)=>{
-                    console.log(data)
                     res.status(200).send({
                         data:data
                     })
@@ -55,6 +54,7 @@ route.get('/',(req,res)=>{
         console.log(req.user)
         if(req.user.role ==='admin')
         {
+            console.log(req.query)
             ctrlUser.userByCat(req.query)
                 .then((data)=>{
                     res.status(200).send({
