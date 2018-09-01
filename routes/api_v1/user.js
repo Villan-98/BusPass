@@ -19,6 +19,35 @@ route.get('/determineRole',(req,res)=>{
         }
     }
 })
+route.get('/allUser',(req,res)=>{
+    if(req.isAuthenticated())
+    {
+        if(req.user.role==='admin')
+        {
+            ctrlUser.allUser()
+                .then((data)=>{
+                    console.log(data)
+                    res.status(200).send({
+                        data:data
+                    })
+                })
+                .catch((err)=>{
+                    console.log(err)
+                    res.status(504).send({
+                        message:"Internal Server Error"
+                    })
+                })
+        }
+        else {
+            res.redirect('/auth/signin')
+        }
+    }
+    else {
+        res.status(401).send({
+            message:"Bad Request"
+        })
+    }
+})
 route.get('/',(req,res)=>{
     console.log("request")
     if(req.isAuthenticated())

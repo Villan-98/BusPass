@@ -118,13 +118,13 @@ let forms=$('#forms')
             <div class="col-10 offset-1 bg-light">
                 <h2 class="h2 bg-dark text-white py-2 mb-3 ml-0  mt-0 text-center">Add ${label}</h2>
                 <div class="form-row px-4">
-                    <div class="col-md-5 pl-5">
+                    <div class="col-md-11 col-lg-5 pl-5">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
                         </div>
                     </div>
-                    <div class="col-md-5 offset-1 ">
+                    <div class="col-md-10 col-lg-5 offset-1 ">
                         <div class="form-group">
                             <label for="employeeId">Employee ID Number</label>
                             <input type="text" class="form-control" id="employeeId" placeholder="Employee Id(1111)" name="employeeId" required>
@@ -132,13 +132,13 @@ let forms=$('#forms')
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-5 pl-5">
+                    <div class="col-md-11 col-lg-5 pl-5">
                         <div class="form-group">
                             <label for="Secret">Secret</label>
                             <input type="password" class="form-control" id="secret" placeholder="Secret" name="secret" required>
                         </div>
                     </div>
-                    <div class="col-md-5 offset-1">
+                    <div class="col-md-10 col-lg-5 offset-1">
                         <div class="form-group">
                             <label for="dob">Date of Birth</label>
                             <input type="date" class="form-control" id="dob" name="dob" required>
@@ -146,13 +146,13 @@ let forms=$('#forms')
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-5 pl-5">
+                    <div class="col-md-11 col-lg-5 pl-5">
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                     </div>
-                    <div class="col-md-5 offset-1">
+                    <div class="col-md-10 col-lg-5 offset-1">
                         <div class="form-group">
                             <label for="cpassword">Confirm Password</label>
                             <input type="text" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required>
@@ -160,13 +160,13 @@ let forms=$('#forms')
                     </div>
                 </div>
                 <div class="form-row px-4">
-                    <div class="col-md-5 pl-5">
+                    <div class="col-md-11 col-lg-5 pl-5">
                         <div class="form-group">
                             <label for="role">Role</label>
                             <input type="text" class="form-control disabled" id="role" value="${label}" name="role" >
                         </div>
                     </div>
-                    <div class="col-md-5 offset-1">
+                    <div class="col-md-10 col-lg-5 offset-1">
                         <div class="form-group">
                             
                             <label class="" for="collDep">Select ${selectLabel}</label>

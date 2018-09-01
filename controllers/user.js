@@ -1,4 +1,5 @@
 const User=require('../db/models').user
+const depot=require('../db/models').depot
 module.exports={
     insert_user:async(requery)=>{
         console.log(requery)
@@ -16,6 +17,14 @@ module.exports={
             where:{
                 role:requery.user
             }
+        })
+    },
+    allUser:async(requery)=>{
+        return User.findAll({
+            include:[{
+                model:depot,
+                attributes:['name']
+            }]
         })
     }
 }

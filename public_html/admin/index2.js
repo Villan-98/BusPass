@@ -89,6 +89,7 @@ $(function(){
                     let ManagerName
 
                     depot.forEach((depot)=>{
+                        console.log(depot)
                         if(depot.users.length===0)
                         {
                             ManagerName='--'
@@ -114,7 +115,65 @@ $(function(){
                 }).catch((err)=>{
                 console.log(err)
             })
+        }
+        if($navId==='navUserDetail')
+        {
+            $.get({
+                url:'../api/v1/user/allUser'
+            })
+                .then((data)=>{
+                    let users=data.data
 
+                    $('#headDiv').show()
+                    $('#headDiv').addClass('offset-lg-2 col-lg-9 col-md-12 mt-5')
+                    $('#topHeading').empty().append('Registered User')
+                    $('#forms').empty().append(`
+                            <div class="row ">
+                            <div class="col-lg-9 offset-lg-2">
+                            <ul class="list-group " id="clgList">
+                                <li class="list-group-item bg-dark ">
+                                    <div class=" mx-1 row py-2  text-white">
+                                        <div class="pl-5 col-3 ">
+                                            User Name
+                                        </div>
+                                        <div class="col-3 pl-md-3  text-center ">
+                                            Role
+                                        </div>
+                                        <div class="col-2  ml-4 offset-1">
+                                            College/Depot
+                                        </div>
+                                        
+                                        <div class="col-2   offset-1">
+                                            Delete User
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            </div>
+                        `)
+                    users.forEach((user)=>{
+                        console.log(user)
+
+                        $('#clgList').append(`
+                    <li href="#" class="list-group-item  px-3">
+                    <div class="row">
+                         <div class="px-3 offset-1 col-3">
+                            ${user.userName}
+                         </div>
+                         <div class="px-3  col-3">
+                            ${user.role}
+                         </div>
+                         <div class="px-3  col-3">
+                            ${user.clgDep}
+                         </div>
+                         
+                         <div class="text-danger text-center" id="${user.id}" onclick="deleteDepot(id)">
+                            X
+                         </div>
+                    </div>
+                    </li>`)
+                    })
+                })
         }
     })
     //some onclick functions

@@ -114,6 +114,7 @@ application.belongsTo(college)
 depot.hasMany(user)
 depot.hasMany(college)
 college.belongsTo(depot)
+user.belongsTo(depot)
 db.sync({
    // alter:true
    // force:true
