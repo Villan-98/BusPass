@@ -13,23 +13,23 @@ $(function(){
             $('#topHeading').empty().append('Registered Colleges')
             $('#forms').empty().append(`
                             <div class="row ">
-                            <div class="col-lg-8 offset-lg-2">
-                            
-                            <ul class="list-group " id="clgList">
-                            <li class="list-group-item bg-dark ">
-                                <div class=" mx-1 row py-2  text-white">
-                            <div class="col-4">
-                            College Name
-                            </div>
-                            <div class="col-lg-4 pl-md-5 col-md-5 text-center offset-lg-1">
-                            Depot Name
-                            </div>
-                            <div class="col-1   offset-1">
-                            Delete
-                            </div>
-                            </div>
-                            </li>
-                            </ul>
+                                <div class="col-lg-8 offset-lg-2">
+                                    <ul class="list-group " id="clgList">
+                                        <li class="list-group-item bg-dark ">
+                                            <div class=" mx-1 row py-2  text-white">
+                                                <div class="col-4">
+                                                    College Name
+                                                </div>
+                                                <div class="col-lg-4 pl-md-5 col-md-5 text-center offset-lg-1">
+                                                    Depot Name
+                                                </div>
+                                                <div class="col-1   offset-1">
+                                                     Delete
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         `)
             $.get({

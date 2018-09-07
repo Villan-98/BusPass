@@ -22,25 +22,44 @@ function fileFilter(file,cb){
 route.get('/',(req,res)=>{
     if(req.isAuthenticated())
     {
-        req['query']={
-            depotId:req.user.DepotId
+        if(req.user.role==='Transport Head')
+        {
+            console.log(req.user)
+            req['query']=req.user.collegeId
+            console.log(req.query)
+            application.applicationByClg(req.query)
+                .then((data)=>{
+                    res.status(200).send({
+                        success:true,
+                        data:data,
+                        code:200
+                    })
+                })
+
         }
-        application.applicationByDpt(req.query)
-            .then((data)=>{
-                res.status(200).send({
-                    success:true,
-                    code:200,
-                    data:data
+        else
+        {
+            req['query']={
+                depotId:req.user.DepotId
+            }
+            application.applicationByDpt(req.query)
+                .then((data)=>{
+                    res.status(200).send({
+                        success:true,
+                        code:200,
+                        data:data
+                    })
                 })
-            })
-            .catch((err)=>{
-                console.log(err)
-                res.status(500).send({
-                    success:false,
-                    code:500,
-                    message:"Bad Request"
+                .catch((err)=>{
+                    console.log(err)
+                    res.status(500).send({
+                        success:false,
+                        code:500,
+                        message:"Bad Request"
+                    })
                 })
-            })
+
+        }
     }
     else{
         res.status(401).send({

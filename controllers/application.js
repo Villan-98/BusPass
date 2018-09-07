@@ -34,8 +34,16 @@ function applicationByDpt(data){
         }]
     })
 }
+function applicationByClg(requery){
+    return application.findAll({
+        where:{
+            collegeId:requery
+        }
+    })
+}
 module.exports={
     newApplication:newApplication,
     getStatus:getStatus,
-    applicationByDpt:applicationByDpt
+    applicationByDpt:applicationByDpt,
+    applicationByClg:applicationByClg
 }
