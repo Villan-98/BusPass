@@ -3,13 +3,27 @@ const depot=require('../db/models').depot
 module.exports={
     insert_user:async(requery)=>{
         console.log(requery)
-        User.create({
-            userName:requery.name,
-            password:requery.password,
-            role:requery.role,
-            clgDep:requery.collDep,
-            DepotId:requery.collDep,
-        })
+        if(requery.role==='Transport Head')
+        {
+            User.create({
+                userName:requery.name,
+                password:requery.password,
+                role:requery.role,
+                clgDep:requery.collDep,
+                collegeId:requery.collDep
+            })
+        }
+        else{
+
+            User.create({
+                userName:requery.name,
+                password:requery.password,
+                role:requery.role,
+                clgDep:requery.collDep,
+
+                DepotId:requery.collDep,
+            })
+        }
     },
     userByCat:async(requery)=>{
         return User.findAll({

@@ -115,8 +115,10 @@ depot.hasMany(user)
 depot.hasMany(college)
 college.belongsTo(depot)
 user.belongsTo(depot)
+user.belongsTo(college)
+college.hasMany(user)
 db.sync({
-   // alter:true
+    alter:true
    // force:true
 }).then(()=>{
     console.log("db sync")
