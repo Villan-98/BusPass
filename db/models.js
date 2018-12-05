@@ -22,10 +22,6 @@ const user=db.define('user',{
     role:{
         allowNull:false,
         type:dt.STRING,
-    },
-    clgDep:{
-        allowNull:false,
-        type:dt.STRING,
     }
 })
 const depot=db.define('Depot',{

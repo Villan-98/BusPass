@@ -41,9 +41,19 @@ function applicationByClg(requery){
         }
     })
 }
+function verify(requery){
+    return application.update({
+        status: requery.response
+    },{
+        where:{
+            id:requery.id
+        }
+    })
+}
 module.exports={
     newApplication:newApplication,
     getStatus:getStatus,
     applicationByDpt:applicationByDpt,
-    applicationByClg:applicationByClg
+    applicationByClg:applicationByClg,
+    verify:verify
 }

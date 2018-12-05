@@ -14,8 +14,7 @@ app.set("view engine",'hbs')
 app.set('views','views')
 app.engine('hbs',hbs.express4({
     defaultLayout:path.join(__dirname,'views/layout/default'),
-    partialsDir:path.join(__dirname,'views/partials'),
-    layoutsDir:path.join(__dirname,'views/partials')
+
 }))
 //express-session//
 app.use(expressSession({

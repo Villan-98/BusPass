@@ -35,7 +35,6 @@ route.get('/',(req,res)=>{
                         code:200
                     })
                 })
-
         }
         else
         {
@@ -58,7 +57,6 @@ route.get('/',(req,res)=>{
                         message:"Bad Request"
                     })
                 })
-
         }
     }
     else{
@@ -119,9 +117,6 @@ route.post('/',upload.array('photo',3),(r,s)=>{
                     })
                 })
                 })
-
-
-
             }
             else{
                 console.log("choose the correct file")
@@ -157,7 +152,6 @@ route.post('/',upload.array('photo',3),(r,s)=>{
                         data:data,
                         code:201
                     })
-
                 })
         })
         .catch((err)=>{
@@ -167,8 +161,6 @@ route.post('/',upload.array('photo',3),(r,s)=>{
                 err:"Application not submitted"
             })
         })
-
-
     })
 route.get('/pdf',(r,s)=>{
     let data={
@@ -176,17 +168,14 @@ route.get('/pdf',(r,s)=>{
     }
     application.getStatus(data)
         .then((data)=>{
-
             const doc=new pdfDocument()
             doc.font('Times-Roman',18)
                 .fontSize(25)
                 .text("Registration form of Bus Pass",{align:'center'})
-
             doc.moveTo(20,110)
                 .lineTo(590,110)
                 .stroke()
             doc.moveDown()
-
             doc.font('Times-Roman',18,100)
                 .fontSize(16)
                 .text("Father's Name:"+data.fatherName,{align:'left'})
@@ -208,7 +197,6 @@ route.get('/pdf',(r,s)=>{
                 .text("  Course:"+data.course,{
                     align:'left'
                 })
-
             doc.moveDown()
             doc.font('Times-Roman',18,100)
                 .fontSize(16)
@@ -229,16 +217,12 @@ route.get('/pdf',(r,s)=>{
                 link:"http:localhost:2500/status"       /*a bit of hard code here*/
 
             })
-
             let a="abc.pdf"
             s.setHeader('Content-disposition', 'attachment; filename="' +a + '"');
-
             s.setHeader('Content-type', 'application/pdf');
             doc.pipe(s)
             doc.end()
         })
-
-
 })
 route.get('/status',(r,s)=>{
     console.log("request has came")
@@ -249,6 +233,27 @@ route.get('/status',(r,s)=>{
         })
         .catch((err)=>{
             s.status(400).json({err:err})
+        })
+})
+route.get('/nbg',(req,res)=>{
+    console.log("response"+req.query.response)
+        if(req.query.response==='1')
+        {
+            req.query.response='Accepted'
+        }
+        else {
+        console.log("in the reject")
+        req.query.response='Rejected'
+        }
+    application.verify(req.query)
+        .then((data)=>{
+            console.log(data)
+            res.status(200).json({
+                data:data
+            })
+        })
+        .catch((err)=>{
+            console.log(err)
         })
 })
 module.exports=route

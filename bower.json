@@ -1,0 +1,17 @@
+{
+  "name": "busspass",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Villan-98"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Villan-98/BusPass",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

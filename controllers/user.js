@@ -34,10 +34,13 @@ module.exports={
     },
     allUser:async(requery)=>{
         return User.findAll({
-            include:[{
+           /* include:[{
                 model:depot,
-                attributes:['name']
-            }]
+                attributes:['name'],
+                where:      {
+                    id:User.DepotId
+                }
+            }]*/
         })
     }
 }
