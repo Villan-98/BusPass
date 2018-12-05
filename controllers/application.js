@@ -37,7 +37,8 @@ function applicationByDpt(data){
 function applicationByClg(requery){
     return application.findAll({
         where:{
-            collegeId:requery
+            collegeId:requery.clgId,
+            status:requery.status
         }
     })
 }

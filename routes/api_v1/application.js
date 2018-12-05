@@ -25,7 +25,7 @@ route.get('/',(req,res)=>{
         if(req.user.role==='Transport Head')
         {
             console.log(req.user)
-            req['query']=req.user.collegeId
+            req.query['clgId']=req.user.collegeId
             console.log(req.query)
             application.applicationByClg(req.query)
                 .then((data)=>{

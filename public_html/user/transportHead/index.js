@@ -34,7 +34,7 @@ $(function(){
                             </div>`)
     console.log("connected")
     $.get({
-        url:"../../api/v1/application/"
+        url:"../../api/v1/application?status=Pending"
     }).then((data)=> {
         console.log(data)
         let appList = data.data
