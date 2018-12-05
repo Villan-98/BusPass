@@ -1,23 +1,23 @@
 $(function(){
 
     $('#outer').empty().append(`<div class="row ">
-                                <div class="col-lg-10 offset-lg-1">
+                                <div class="col-lg-10 offset-lg-1 mt-5">
                                     <ul class="list-group " id="appList">
                                         <li class="list-group-item bg-dark ">
                                             <div class=" mx-1 row py-2  text-white">
                                                 <div class="col-3">
                                                     Applicant Name
-                                                    <br>/Fee Receipt
+                                                    <br>/View Document
                                                 </div>
                                                 <div class="col-lg-3 pl-md-5 col-md-5 text-center ">
-                                                    College Name
+                                                    Email Id
                                                     <br>
-                                                    /College Id
+                                                    /Course
                                                 </div>
                                                 <div class="col-1 offset-1">
-                                                     <a>App. Status</a>
+                                                     <a>Age</a>
                                                      <br>
-                                                     age
+                                                     Year
                                                 </div>
                                                 
                                                 <div class="col-1  offset-1">
@@ -48,10 +48,14 @@ $(function(){
                                                      <img src=""> View document</img>
                                                 </div>
                                                 <div class="col-lg-3 pl-md-5 col-md-5 text-center ">
-                                                    ${app.status}
+                                                    ${app.email}
+                                                    <br>
+                                                    ${app.course}
                                                 </div>
                                                 <div class="col-1 offset-1">
                                                      ${app.age}
+                                                     <br>
+                                                     ${app.year}
                                                 </div>
                                                 
                                                 <div class="col-1  offset-1">
