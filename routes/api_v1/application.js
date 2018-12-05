@@ -237,14 +237,30 @@ route.get('/status',(r,s)=>{
 })
 route.get('/nbg',(req,res)=>{
     console.log("response"+req.query.response)
+    if(req.query.stage==='1')
+    {
+
         if(req.query.response==='1')
         {
             req.query.response='Accepted'
         }
         else {
-        console.log("in the reject")
-        req.query.response='Rejected'
+            console.log("in the reject")
+            req.query.response='Rejected'
         }
+    }
+    else {
+
+        if(req.query.response==='1')
+        {
+            req.query.response='Approved'
+        }
+        else {
+            console.log("in the reject")
+            req.query.response='Rejected'
+        }
+    }
+
     application.verify(req.query)
         .then((data)=>{
             console.log(data)

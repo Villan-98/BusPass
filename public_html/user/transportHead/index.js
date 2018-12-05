@@ -81,7 +81,7 @@ response=function (id,ans){
       let data={
         id:id,
       }
-      $.get('/api/v1/application/nbg?id='+id,'&response='+ans).then((data)=>{
+      $.get('/api/v1/application/nbg?id='+id,'&response='+ans+'&stage=1').then((data)=>{
           console.log(data)
       })
           .catch((err)=>{

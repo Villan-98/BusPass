@@ -31,7 +31,10 @@ function applicationByDpt(data){
             where:{
                 DepotId:data.depotId
             }
-        }]
+        }],
+        where:{
+            status:"Accepted"
+        }
     })
 }
 function applicationByClg(requery){
