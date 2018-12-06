@@ -164,7 +164,7 @@ route.post('/',upload.array('photo',3),(r,s)=>{
     })
 route.get('/pdf',(r,s)=>{
     let data={
-        id:32
+        id:''
     }
     application.getStatus(data)
         .then((data)=>{

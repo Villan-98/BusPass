@@ -1,6 +1,7 @@
 $(function(){
 
-    $('#outer').empty().append(`<div class="row ">
+    refreshList=function(data){
+        $('#outer').empty().append(`<div class="row ">
                                 <div class="col-lg-10 offset-lg-1 mt-5">
                                     <ul class="list-group " id="appList">
                                         <li class="list-group-item bg-dark ">
@@ -32,11 +33,6 @@ $(function(){
                                     </ul>
                                 </div>
                             </div>`)
-    console.log("connected")
-    $.get({
-        url:"../../api/v1/application?status=Pending"
-    }).then((data)=> {
-        console.log(data)
         let appList = data.data
         appList.forEach((app) => {
             $('#appList').append(`
@@ -69,6 +65,13 @@ $(function(){
                                         </li>
 `)
         })
+
+    }
+    $.get({
+        url:"../../api/v1/application?status=Pending"
+    }).then((data)=> {
+        refreshList(data)
+
     })
         .catch((err)=>{
             console.log(err)
@@ -82,8 +85,12 @@ response=function (id,ans){
         id:id,
       }
       $.get('/api/v1/application/nbg?id='+id,'&response='+ans+'&stage=1').then((data)=>{
-          console.log(data)
-      })
+          $.get({
+              url:"../../api/v1/application?status=Pending"
+          }).then((data)=> {
+              refreshList(data)
+          })
+          })
           .catch((err)=>{
               console.log(err)
           })
