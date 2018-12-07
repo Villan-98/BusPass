@@ -41,7 +41,7 @@ $(function(){
                                                 <div class="col-2">
                                                      ${app.name}
                                                      <br>
-                                                     <img src=""> View document</img>
+                                                     <a href="../../../public/assets/uploads/${app.paymentSs}" target="_blank">View document</a>
                                                 </div>
                                                 <div class="col-lg-3 pl-md-5 col-md-5 text-center ">
                                                     ${app.email}

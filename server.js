@@ -7,7 +7,7 @@ const app=express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 //statically holding the public folder//
-app.use('/public',express.static(path.join(__dirname,'public')))
+app.use('/public',express.static(path.join(__dirname+'/public')))
 
 //view engine//
 app.set("view engine",'hbs')

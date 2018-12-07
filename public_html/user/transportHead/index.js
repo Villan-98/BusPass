@@ -7,26 +7,27 @@ $(function(){
                                         <li class="list-group-item bg-dark ">
                                             <div class=" mx-1 row py-2  text-white">
                                                 <div class="col-3">
-                                                    Applicant Name
-                                                    <br>/View Document
+                                                    <a>Applicant Name</a>
+                                                    <br>
+                                                    <a>Fee Receipt</a>
                                                 </div>
                                                 <div class="col-lg-3 pl-md-5 col-md-5 text-center ">
-                                                    Email Id
+                                                   <a>Email Id</a> 
                                                     <br>
-                                                    /Course
+                                                    <a>Id Card</a>
                                                 </div>
                                                 <div class="col-1 offset-1">
-                                                     <a>Age</a>
+                                                     <a>course</a>
                                                      <br>
-                                                     Year
+                                                     <a>Year</a>
                                                 </div>
                                                 
                                                 <div class="col-1  offset-1">
-                                                     Accept
+                                                     <a>Accept</a>
                                                 </div>
                                                 
                                                 <div class="col-1   offset-1">
-                                                     Reject
+                                                     <a>Reject</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -41,15 +42,15 @@ $(function(){
                                                 <div class="col-3">
                                                      ${app.name}
                                                      <br>
-                                                     <img src=""> View document</img>
+                                                     <a href="../../../public/assets/uploads/${app.feeReceipt}" target="_blank">View Document</a> 
                                                 </div>
                                                 <div class="col-lg-3 pl-md-5 col-md-5 text-center ">
                                                     ${app.email}
                                                     <br>
-                                                    ${app.course}
+                                                    <a href="../../../public/assets/uploads/${app.idCard}" target="_blank">View Document</a>
                                                 </div>
                                                 <div class="col-1 offset-1">
-                                                     ${app.age}
+                                                     ${app.course}
                                                      <br>
                                                      ${app.year}
                                                 </div>
