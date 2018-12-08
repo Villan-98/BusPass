@@ -24,16 +24,16 @@ function getStatus(data){
         }
     })
 }
-function applicationByDpt(data){
+function applicationByDpt(requery){
     return application.findAll({
         include:[{
             model:college,
             where:{
-                DepotId:data.depotId
+                DepotId:requery.depotId
             }
         }],
         where:{
-            status:"Accepted"
+            status:requery.status
         }
     })
 }
@@ -50,7 +50,10 @@ function verify(requery){
         status: requery.response
     },{
         where:{
-            id:requery.id
+            id:requery.id,
+            status:{
+                $ne:"Approved"
+            }
         }
     })
 }

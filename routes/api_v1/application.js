@@ -38,9 +38,8 @@ route.get('/',(req,res)=>{
         }
         else
         {
-            req['query']={
-                depotId:req.user.DepotId
-            }
+            console.log(req.query)
+            req.query['depotId']=req.user.DepotId
             application.applicationByDpt(req.query)
                 .then((data)=>{
                     res.status(200).send({
@@ -57,6 +56,7 @@ route.get('/',(req,res)=>{
                         message:"Bad Request"
                     })
                 })
+
         }
     }
     else{
@@ -257,7 +257,7 @@ route.get('/nbg',(req,res)=>{
         }
         else {
             console.log("in the reject")
-            req.query.response='Rejected'
+            req.query.response='Cancelled'
         }
     }
 
