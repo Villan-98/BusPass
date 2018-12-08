@@ -18,7 +18,7 @@ $(function(){
         }
     })
     refreshList=function(data,status){
-        let cls,btnCls,btnRejCls,btnAccCls
+        let cls,btnRejCls,btnAccCls
         if(status==="Pending")
         {
             cls='alert-primary'

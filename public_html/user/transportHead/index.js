@@ -1,8 +1,42 @@
 $(function(){
-
-    refreshList=function(data){
+    let anchor=$('a')
+    anchor.click((e)=>{
+        let id=(e.target).getAttribute('id')
+        if(id==='navRejected')
+        {
+            $.get('../../../api/v1/application?status=Rejected')
+                .then((data)=>{
+                    refreshList(data,"Rejected")
+                })
+        }
+        if(id==='navAccepted')
+        {
+            $.get('../../../api/v1/application?status=Accepted')
+                .then((data)=>{
+                    refreshList(data,"Accepted")
+                })
+        }
+    })
+    refreshList=function(data,status){
+        let cls,btnRejCls,btnAccCls
+        if(status==="Pending")
+        {
+            cls='alert-primary'
+        }
+        else if(status==='Accepted')
+        {
+            cls='alert-success'
+            btnAccCls="disabled"
+            btnRejCls="disabled"
+        }
+        else if(status==='Rejected')
+        {
+            cls='alert-danger'
+            btnRejCls="disabled"
+        }
         $('#outer').empty().append(`<div class="row ">
                                 <div class="col-lg-10 offset-lg-1 mt-5">
+                                <div class="alert ${cls} h3 text-center mb-0">${status}</div>
                                     <ul class="list-group " id="appList">
                                         <li class="list-group-item bg-dark ">
                                             <div class=" mx-1 row py-2  text-white">
@@ -56,11 +90,11 @@ $(function(){
                                                 </div>
                                                 
                                                 <div class="col-1  offset-1">
-                                                     <button class="btn btn-primary"   id=${app.id} onclick="response(id,1)">Accept</button>
+                                                     <button class="btn btn-primary ${btnAccCls}"   id=${app.id} onclick="response(id,1)">Accept</button>
                                                 </div>
                                                 
                                                 <div class="col-1   offset-1">
-                                                     <button class="btn btn-danger" id=${app.id} onclick="response(id,0)">Reject</button>
+                                                     <button class="btn btn-danger ${btnRejCls}" id=${app.id} onclick="response(id,0)">Reject</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -71,7 +105,7 @@ $(function(){
     $.get({
         url:"../../api/v1/application?status=Pending"
     }).then((data)=> {
-        refreshList(data)
+        refreshList(data,"Pending")
 
     })
         .catch((err)=>{
@@ -89,7 +123,7 @@ response=function (id,ans){
           $.get({
               url:"../../api/v1/application?status=Pending"
           }).then((data)=> {
-              refreshList(data)
+              refreshList(data,"Pending")
           })
           })
           .catch((err)=>{
