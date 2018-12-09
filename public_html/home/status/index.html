@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
 
-    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
-    <link href="../../bower_components/jquery-toast-plugin/src/jquery.toast.min.css">
+    <link rel="stylesheet" href="../../../bowerComponents/bootstrap/dist/css/bootstrap.css">
+    <link href="../../../bowerComponents/jquery-toast-plugin/src/jquery.toast.min.css">
 
 </head>
 <body class="bg-light">
@@ -47,9 +47,9 @@
 </div>
 </body>
 
-<script src="../../../bower_components/jquery/dist/jquery.js"></script>
-<script src="../../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="../../../bower_components/jquery-toast-plugin/src/jquery.toast.js"></script>
+<script src="../../../bowerComponents/jquery/dist/jquery.js"></script>
+<script src="../../../bowerComponents/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../../../bowerComponents/jquery-toast-plugin/src/jquery.toast.js"></script>
 <script>
     $(function(){
         console.log("connected")
@@ -61,8 +61,9 @@
         getStatus.click(()=>{
              let myId=id.val()
             console.log("btn clicked")
-            $.get(`/api/v1/apply/status?id=${myId}`,(data)=>{
-                console.log(data)
+            $.get(`/api/v1/application/status?id=${myId}`)
+                .then((data)=>{
+                    let info=data.data
                 block.empty()
                 console.log("length is"+data.data.length)
                 if(data.data.length)
@@ -72,13 +73,48 @@
                 }
                 else
                 {
-                    container.append(`<div class="row">
-                                <div class="col-md-3 offset-2">
-                                   <h3 class="h3"> done</h3>
-                                </div>
-                            </div>`)
+                    container.append(`<div class="row ">
+                                        <div class="col-8 offset-3 bg-white pb-3">
+                                            <div class="row">
+                                            <div class="col px-0 ">
+                                                <h2 class="text-center text-white pt-3 mx-0 bg-primary">Application Status</h2>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">Name:</a>
+                                                </div>
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">${info.name}</a>
+                                                </div>
+                                             </div><div class="row">
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">Application Id:</a>
+                                                </div>
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">${info.id}</a>
+                                                </div>
+                                             </div><div class="row">
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">Father's Name:</a>
+                                                </div>
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">${info.fatherName}</a>
+                                                </div>
+                                             </div><div class="row">
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">status:</a>
+                                                </div>
+                                                <div class="col-5 offset-1">
+                                                    <a class="h3">${info.status}</a>
+                                                </div>
+                                             </div>
+                                     </div>`)
                 }
-            })
+                })
+                .catch((err)=>{
+                    console.log("OOps something went wrong")
+                })
         })
     })
 </script>
