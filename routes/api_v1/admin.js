@@ -9,7 +9,7 @@ route.post('/addUser',(req,res)=>{
     {
         if(req.user.role==='admin')
         {
-            console.log("here is the request")
+            //console.log("here is the request")
             if(req.body.secret===config.secret)
             {
                 ctrlUser.insert_user(req.body)
@@ -29,11 +29,11 @@ route.post('/addUser',(req,res)=>{
                     })
                 })
             }else {
-                res.status(400).send({
+                res.status(401).send({
                     success:false,
-                    code:"400",
+                    code:"401",
                     error:{
-                        message:"Not authorize for same action"
+                        message:"unauthorized action"
                     }
                 })
             }

@@ -8,7 +8,19 @@ route.get('/signout',(req,res)=>{
     req.user=null
     req.logout()
     req.session.destroy((err)=>{
-        res.redirect('/auth/signin')
+        if(err)
+        {
+            console.log(err)
+            res.status(500).json({
+                code:"500",
+                message:"Internal Server Error"
+            })
+        }
+        else
+        {
+
+            res.redirect('/auth/signin')
+        }
     })
 
 })

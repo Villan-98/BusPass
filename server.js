@@ -34,12 +34,12 @@ app.use('/admin',(req,res,next)=>{
     {
         if(req.user.role==='admin')
         {
-            console.log("done")
+           // console.log("done")
             next()
         }
     }
     else{
-        console.log("wrong user")
+       // console.log("wrong user")
         res.redirect('/auth/signin')
     }
 })
@@ -50,44 +50,44 @@ app.use('/user/',(req,res,next)=>{
     {
         if(req.user.role==='Transport Head')
         {
-            console.log(req.url)
+           // console.log(req.url)
             if(!req.url.includes("/transportHead"))         //so that other authenticated user can't use this profile
             {
                 res.redirect('/auth/signin')
             }
             else {
 
-                console.log("done")
+                //console.log("done")
                 next()
             }
         }
         else if(req.user.role==="Depot Manager")
         {
 
-            console.log(req.url)
+            //console.log(req.url)
             if(!req.url.includes("/depotManager"))      //so that other authenticated user can't use this profile
             {
-                console.log("NO");
+                //console.log("NO");
                 res.redirect('/auth/signin')
 
             }
             else
             {
 
-                console.log("done")
+                //console.log("done")
                 next()
             }
         }
         else {
-            res.status(401).send({
-                code:"401",
+            res.status(511).send({
+                code:"511",
                 success:false,  
-                message:"Bad Request"
+                message:"Network Authentication required"
             })
         }
     }
     else{
-        console.log("wrong user")
+        //console.log("wrong user")
         res.redirect('/auth/signin')
     }
 })

@@ -1,7 +1,7 @@
 const route=require('express').Router()
 const ctrlUser=require('../../controllers/user')
 route.get('/determineRole',(req,res)=>{
-    console.log("request in the determine role")
+    //console.log("request in the determine role")
     if(req.isAuthenticated())
     {
         if(req.user.role==='admin')
@@ -14,7 +14,7 @@ route.get('/determineRole',(req,res)=>{
         }
         else if(req.user.role==='Depot Manager')
         {
-            console.log("request in the depot manager")
+            //console.log("request in the depot manager")
             res.redirect('/user/depotManager')
         }
     }
@@ -32,8 +32,10 @@ route.get('/allUser',(req,res)=>{
                 })
                 .catch((err)=>{
                     console.log(err)
-                    res.status(504).send({
-                        message:"Internal Server Error"
+                    res.status(500).send({
+                        message:"Internal Server Error",
+                        success:false,
+                        code:"500"
                     })
                 })
         }
@@ -43,22 +45,23 @@ route.get('/allUser',(req,res)=>{
     }
     else {
         res.status(401).send({
-            message:"Bad Request"
+            message:"Unauthorized action"
         })
     }
 })
 route.get('/',(req,res)=>{
-    console.log("request")
+   // console.log("request")
     if(req.isAuthenticated())
     {
-        console.log(req.user)
+       // console.log(req.user)
         if(req.user.role ==='admin')
         {
-            console.log(req.query)
+            //console.log(req.query)
             ctrlUser.userByCat(req.query)
                 .then((data)=>{
                     res.status(200).send({
-                        data:data
+                        data:data,
+
                     })
                 }).catch((err)=>{
                     console.log(err)
@@ -73,7 +76,7 @@ route.get('/',(req,res)=>{
         else {
             res.status(401).send({
                 success:false,
-                message:"Bad Request",
+                message:"Unauthorized action",
                 code:"401"
             })
         }

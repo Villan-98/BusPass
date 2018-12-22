@@ -46,13 +46,23 @@ function applicationByClg(requery){
     })
 }
 function verify(requery){
+    console.log(requery.stage)
+    let present_status;         // to prevent the user to reject the accepted applications
+    if(requery.stage==='1')
+    {
+        present_status="Accepted"
+    }
+    else if(requery.stage==='2')
+    {
+        present_status="Approved"
+    }
     return application.update({
         status: requery.response
     },{
         where:{
             id:requery.id,
             status:{
-                $ne:"Approved"
+                $ne:present_status
             }
         }
     })

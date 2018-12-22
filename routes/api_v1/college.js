@@ -26,13 +26,13 @@ route.post('/addCollege',(req,res)=>{
     {
         if(req.user.role==='admin')
         {
-            console.log(req.body)
+            //console.log(req.body)
            let  body={
                 dptName:req.body.depot
             }
             ctrlCollege.getOneDepot(body)
                 .then((data)=> {
-                    console.log(data.id)
+                    //console.log(data.id)
                     req.body['dptId']=data.id
                     ctrlCollege.insertCollege(req.body)
                         .then(()=>{
@@ -42,7 +42,7 @@ route.post('/addCollege',(req,res)=>{
                             })
                         })
                         .catch((err)=>{
-                            console.log(err)
+                           // console.log(err)
                             res.status(500).send({
                                 code:"500",
                                 message:"Internal Server Error"
@@ -54,7 +54,7 @@ route.post('/addCollege',(req,res)=>{
         else {
             res.status(401).send({
                 code:"400",
-                message:"Unauthorized"
+                message:"Unauthorized action"
             })
         }
     }
@@ -62,10 +62,10 @@ route.post('/addCollege',(req,res)=>{
 
 route.delete('/:id',(req,res)=>{
 
-    console.log(req.params.id)
+    //console.log(req.params.id)
     ctrlCollege.deleteCollege(req.params)
         .then((data)=>{
-            console.log(data)
+           // console.log(data)
             ctrlCollege.getAllCollege()
                 .then((data)=>{
                  res.status(200).send({
@@ -77,9 +77,9 @@ route.delete('/:id',(req,res)=>{
         })
         .catch((err)=>{
             console.log(err)
-            res.status(404).send({
+            res.status(500).send({
                 success:false,
-                code:404,
+                code:500,
                 message:"Internal Server Error"
             })
             }

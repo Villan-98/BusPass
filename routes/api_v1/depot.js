@@ -41,7 +41,8 @@ route.post('/addDepot',(req,res)=>{
         else {
             res.status(401).send({
                 code:"401",
-                message:"Bad Request"
+                message:"Unauthorized Action",
+                success:false
             })
         }
     }
@@ -67,10 +68,10 @@ route.delete('/:id',(req,res)=>{
                             })
                         })
                         .catch((err)=>{
-                            res.status(504).send({
+                            res.status(500).send({
                                 success:false,
                                 message:"Internal Server Error",
-                                code:504
+                                code:500
                             })
                         })
 
@@ -80,7 +81,7 @@ route.delete('/:id',(req,res)=>{
             res.status(401).send({
                 code:401,
                 success:false,
-                message:"Bad Request"
+                message:"Unauthorized action"
             })
         }
     }

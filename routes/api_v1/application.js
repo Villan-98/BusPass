@@ -24,9 +24,9 @@ route.get('/',(req,res)=>{
     {
         if(req.user.role==='Transport Head')
         {
-            console.log(req.user)
+            //console.log(req.user)
             req.query['clgId']=req.user.collegeId
-            console.log(req.query)
+           // console.log(req.query)
             application.applicationByClg(req.query)
                 .then((data)=>{
                     res.status(200).send({
@@ -38,7 +38,7 @@ route.get('/',(req,res)=>{
         }
         else
         {
-            console.log(req.query)
+            //console.log(req.query)
             req.query['depotId']=req.user.DepotId
             application.applicationByDpt(req.query)
                 .then((data)=>{
@@ -53,7 +53,7 @@ route.get('/',(req,res)=>{
                     res.status(500).send({
                         success:false,
                         code:500,
-                        message:"Bad Request"
+                        message:"Internal Server Error"
                     })
                 })
 
@@ -61,7 +61,7 @@ route.get('/',(req,res)=>{
     }
     else{
         res.status(401).send({
-            message:"Unautorize access",
+            message:"Unauthorized access",
             code:"401",
             success:false
         })
@@ -155,6 +155,7 @@ route.post('/',upload.array('photo',3),(r,s)=>{
                 })
         })
         .catch((err)=>{
+            console.log(err)
             s.status(400).json({
                 success:false,
                 code:400,
@@ -225,14 +226,15 @@ route.get('/pdf',(r,s)=>{
         })
 })
 route.get('/status',(r,s)=>{
-    console.log("request has came")
-    console.log(r.params)
+    //console.log("request has came")
+    //console.log(r.params)
     application.getStatus(r.query)
         .then((data)=>{
             s.status(200).json({data})
         })
         .catch((err)=>{
-            s.status(400).json({err:err})
+            console.log(err)
+            s.status(500).json({message:"Internal Server error"})
         })
 })
 route.get('/nbg',(req,res)=>{
@@ -245,8 +247,9 @@ route.get('/nbg',(req,res)=>{
             req.query.response='Accepted'
         }
         else {
-            console.log("in the reject")
+            //console.log("in the reject")
             req.query.response='Rejected'
+
         }
     }
     else {
@@ -256,20 +259,23 @@ route.get('/nbg',(req,res)=>{
             req.query.response='Approved'
         }
         else {
-            console.log("in the reject")
+            //console.log("in the reject")
             req.query.response='Cancelled'
         }
     }
 
     application.verify(req.query)
         .then((data)=>{
-            console.log(data)
+            //console.log(data)
             res.status(200).json({
                 data:data
             })
         })
         .catch((err)=>{
             console.log(err)
+            res.status(500).json({
+                message:"Internal Server Error"
+            })
         })
 })
 module.exports=route
