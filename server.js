@@ -48,15 +48,40 @@ app.use('/user/',(req,res,next)=>{
 
     if(req.isAuthenticated())
     {
-        if(req.user.role==='Transport Head'||req.user.role==='Depot Manager')
+        if(req.user.role==='Transport Head')
         {
-            console.log("done")
-            next()
+            console.log(req.url)
+            if(!req.url.includes("/transportHead"))         //so that other authenticated user can't use this profile
+            {
+                res.redirect('/auth/signin')
+            }
+            else {
+
+                console.log("done")
+                next()
+            }
+        }
+        else if(req.user.role==="Depot Manager")
+        {
+
+            console.log(req.url)
+            if(!req.url.includes("/depotManager"))      //so that other authenticated user can't use this profile
+            {
+                console.log("NO");
+                res.redirect('/auth/signin')
+
+            }
+            else
+            {
+
+                console.log("done")
+                next()
+            }
         }
         else {
             res.status(401).send({
                 code:"401",
-                success:false,
+                success:false,  
                 message:"Bad Request"
             })
         }
