@@ -34,12 +34,12 @@ app.use('/admin',(req,res,next)=>{
     {
         if(req.user.role==='admin')
         {
-           // console.log("done")
+            // console.log("done")
             next()
         }
     }
     else{
-       // console.log("wrong user")
+        // console.log("wrong user")
         res.redirect('/auth/signin')
     }
 })
@@ -50,7 +50,7 @@ app.use('/user/',(req,res,next)=>{
     {
         if(req.user.role==='Transport Head')
         {
-           // console.log(req.url)
+            // console.log(req.url)
             if(!req.url.includes("/transportHead"))         //so that other authenticated user can't use this profile
             {
                 res.redirect('/auth/signin')
@@ -81,7 +81,7 @@ app.use('/user/',(req,res,next)=>{
         else {
             res.status(511).send({
                 code:"511",
-                success:false,  
+                success:false,
                 message:"Network Authentication required"
             })
         }

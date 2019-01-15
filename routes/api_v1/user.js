@@ -50,10 +50,10 @@ route.get('/allUser',(req,res)=>{
     }
 })
 route.get('/',(req,res)=>{
-   // console.log("request")
+    // console.log("request")
     if(req.isAuthenticated())
     {
-       // console.log(req.user)
+        // console.log(req.user)
         if(req.user.role ==='admin')
         {
             //console.log(req.query)
@@ -64,7 +64,7 @@ route.get('/',(req,res)=>{
 
                     })
                 }).catch((err)=>{
-                    console.log(err)
+                console.log(err)
                 res.status(500).send({
                     success:false,
                     message:"Internal Server Error",
