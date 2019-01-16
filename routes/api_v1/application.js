@@ -4,6 +4,8 @@ const fs=require('fs')
 const path=require('path')
 var upload=multer({dest:'upload'})
 const application=require('../../controllers/application')
+const pdfshift = require('pdfshift')('d72a0afd6e6b477f95926d483fac1d86');
+var pdfcrowd = require("pdfcrowd");
 function fileFilter(file,cb){
     let filetype=/png|jpg|jpeg/
     const extname=filetype.test(path.extname(file.originalname).toLowerCase())
@@ -86,6 +88,7 @@ route.post('/',upload.array('photo',3),(r,s)=>{
             {
                  filename=Date.now()+r.files[i].originalname
                 var pathname=r.files[i].path
+                console.log("pathname"+pathname)
                 fs.readFile(r.files[i].path,(err,data)=>{
                     if(err){
 
@@ -146,11 +149,12 @@ route.post('/',upload.array('photo',3),(r,s)=>{
         .then(()=>{
             application.getStatus(r.body)
                 .then((data)=>{
-                    s.status(201).send({
+                    s.redirect(`/registered_application/? id=${data.id}`)
+                    /*s.status(201).send({
                         success:true,
                         data:data,
                         code:201
-                    })
+                    })*/
                 })
         })
         .catch((err)=>{
@@ -162,11 +166,48 @@ route.post('/',upload.array('photo',3),(r,s)=>{
             })
         })
     })
+route.get('/pdf',(req,res)=>{
 
+
+    var client = new pdfcrowd.HtmlToPdfClient("Villan_98", "41aedac804ae5fd56379ad59ecbefd24");
+    //console.log(req.query.id)
+    let id=req.query.id
+// run the conversion and write the result to a file
+    client.convertUrlToFile(
+        "https://fresh-eagle-37.localtunnel.me/registered_application?id="+id,                  //url by localtunnel
+        `${id}.pdf`,
+        function(err, fileName) {
+            if (err) return console.error("Pdfcrowd Error: " + err);
+            console.log("Success: the file was created " + fileName);
+
+               fs.readFile(fileName, (err, data) => {
+                if (err) {
+                            console.log(err)
+                            console.log("oops ")
+                        }
+                //console.log(req.query)
+                //console.log(r.files[i])
+                //let temp=req.query.id+".pdf"
+                //console.log(temp)
+                fs.writeFile('public/assets/registration_form/' + fileName, data, (err) => {
+                if (err) {
+                  console.log(err)
+                }
+                else
+                {
+                    res.redirect('/public/assets/registration_form/'+fileName)
+                }
+            })
+        })
+
+        })
+})
 route.get('/status',(r,s)=>{
-    //console.log("request has came")
-    //console.log(r.params)
-    application.getStatus(r.query)
+    console.log("request has came")
+    console.log(r.params)
+    console.log(r.query)
+    let query=r.query ||r.params
+    application.getStatus(query)
         .then((data)=>{
             s.status(200).json({data})
         })
