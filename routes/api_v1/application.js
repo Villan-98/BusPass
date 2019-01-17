@@ -243,7 +243,17 @@ route.get('/nbg',(req,res)=>{
         else {
             //console.log("in the reject")
             req.query.response='Rejected'
+            let text="Your application for the bus-pass is rejected by the transport head of your college\n"+
+                "You may contact to your college's admin for any query( reason for the rejection of application)\n"+
+                "Thank You\n"+
+                "\n"+
+                "With Regards\n"+
+                "Team Pass Manager\n"+
+                "\n"+
+                "This is a system generated mail. Please donot reply to the same!"
 
+            let emailId="sachinrathore453@gmail.com"
+            mail.doMail({text:text,emailId:emailId})
         }
     }
     else {
