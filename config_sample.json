@@ -3,5 +3,11 @@
     "NAME":"database",
     "USER":"user",
     "PASSWORD":"password"
+  },
+  "secret":"abc",
+  "pdfCrowd":{
+    "apiKey":"ec0ac97b39a8d596bf609514dskdfljskaflskjb50dd41",
+    "url":"https://light-crab-27.localtunnel.me/registered_application?id=",
+    "userName":"UserName"
   }
 }

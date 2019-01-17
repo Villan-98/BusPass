@@ -4,8 +4,11 @@ const fs=require('fs')
 const path=require('path')
 var upload=multer({dest:'upload'})
 const application=require('../../controllers/application')
-const pdfshift = require('pdfshift')('d72a0afd6e6b477f95926d483fac1d86');
-var pdfcrowd = require("pdfcrowd");
+const pdfcrowd = require("pdfcrowd")
+const pdfCrowd=require('../../config').pdfCrowd
+
+
+
 function fileFilter(file,cb){
     let filetype=/png|jpg|jpeg/
     const extname=filetype.test(path.extname(file.originalname).toLowerCase())
@@ -169,12 +172,14 @@ route.post('/',upload.array('photo',3),(r,s)=>{
 route.get('/pdf',(req,res)=>{
 
 
-    var client = new pdfcrowd.HtmlToPdfClient("Villan_98", "41aedac804ae5fd56379ad59ecbefd24");
+    var client = new pdfcrowd.HtmlToPdfClient(pdfCrowd.userName,pdfCrowd.apiKey);
     //console.log(req.query.id)
     let id=req.query.id
+    console.log(pdfCrowd.url+id)
 // run the conversion and write the result to a file
     client.convertUrlToFile(
-        "https://fresh-eagle-37.localtunnel.me/registered_application?id="+id,                  //url by localtunnel
+        pdfCrowd.url + id,
+        //url by localtunnel(it is need to be changed every time user start localtunnel in dev. env.)
         `${id}.pdf`,
         function(err, fileName) {
             if (err) return console.error("Pdfcrowd Error: " + err);
