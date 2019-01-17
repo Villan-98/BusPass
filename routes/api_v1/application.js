@@ -6,7 +6,7 @@ var upload=multer({dest:'upload'})
 const application=require('../../controllers/application')
 const pdfcrowd = require("pdfcrowd")
 const pdfCrowd=require('../../config').pdfCrowd
-const mail=require('../../mailingStrategy/usingMailgun')
+const mailType=require('../../mailingStrategy/mailType')
 
 
 function fileFilter(file,cb){
@@ -153,15 +153,8 @@ route.post('/',upload.array('photo',3),(r,s)=>{
             application.getStatus(r.body)
                 .then((data)=>{
                     console.log(data)
-                    let text="Your Application is registered. You may check your application's status at 'domainName/application/status'\n"+
-                        " This is a system generated app donot reply!\n" +
-                        "\n"+
-                        "Thank You\n" +
-                        "\n"+
-                        "With Regards\n" +
-                        "Team Pass Management\n"
                         let emailId="sachinrathore453@gmail.com"
-                    mail.doMail({text:text,emailId:emailId})
+                    mailType(1,emailId)
                     s.redirect(`/registered_application/? id=${data.id}`)
                     /*s.status(201).send({
                         success:true,
@@ -233,6 +226,7 @@ route.get('/status',(r,s)=>{
 })
 route.get('/nbg',(req,res)=>{
     console.log("response"+req.query.response)
+    let emailId="sachinrathore453@gmail.com"
     if(req.query.stage==='1')
     {
 
@@ -243,17 +237,9 @@ route.get('/nbg',(req,res)=>{
         else {
             //console.log("in the reject")
             req.query.response='Rejected'
-            let text="Your application for the bus-pass is rejected by the transport head of your college\n"+
-                "You may contact to your college's admin for any query( reason for the rejection of application)\n"+
-                "Thank You\n"+
-                "\n"+
-                "With Regards\n"+
-                "Team Pass Manager\n"+
-                "\n"+
-                "This is a system generated mail. Please donot reply to the same!"
 
-            let emailId="sachinrathore453@gmail.com"
-            mail.doMail({text:text,emailId:emailId})
+            mailType(2,emailId)
+           // mail.doMail({text:text,emailId:emailId})
         }
     }
     else {
@@ -261,10 +247,12 @@ route.get('/nbg',(req,res)=>{
         if(req.query.response==='1')
         {
             req.query.response='Approved'
+            mailType(4,emailId)
         }
         else {
             //console.log("in the reject")
             req.query.response='Cancelled'
+            mailType(3,emailId)
         }
     }
 
