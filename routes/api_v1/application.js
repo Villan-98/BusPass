@@ -6,7 +6,7 @@ var upload=multer({dest:'upload'})
 const application=require('../../controllers/application')
 const pdfcrowd = require("pdfcrowd")
 const pdfCrowd=require('../../config').pdfCrowd
-
+const mail=require('../../mailingStrategy/usingMailgun')
 
 
 function fileFilter(file,cb){
@@ -152,6 +152,16 @@ route.post('/',upload.array('photo',3),(r,s)=>{
         .then(()=>{
             application.getStatus(r.body)
                 .then((data)=>{
+                    console.log(data)
+                    let text="Your Application is registered. You may check your application's status at 'domainName/application/status'\n"+
+                        " This is a system generated app donot reply!\n" +
+                        "\n"+
+                        "Thank You\n" +
+                        "\n"+
+                        "With Regards\n" +
+                        "Team Pass Management\n"
+                        let emailId="sachinrathore453@gmail.com"
+                    mail.doMail({text:text,emailId:emailId})
                     s.redirect(`/registered_application/? id=${data.id}`)
                     /*s.status(201).send({
                         success:true,

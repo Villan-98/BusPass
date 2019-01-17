@@ -9,5 +9,10 @@
     "apiKey":"ec0ac97b39a8d596bf609514dskdfljskaflskjb50dd41",
     "url":"https://light-crab-27.localtunnel.me/registered_application?id=",
     "userName":"UserName"
+  },
+
+  "mailGun":{
+    "apiKey":"Your api key",
+    "domain":"your domain"
   }
 }
