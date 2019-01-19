@@ -205,33 +205,11 @@ let forms=$('#forms')
         let collDep=$('#collDep').val()
         if(!name||!dob||!secret||!role||!password||!cpassword||!collDep)
         {
-            $.toast({
-                textColor:"red",
-                loaderBg:'#fc4f4f',
-                heading:"Warning",
-                text:"All fields are mandatory",
-                bgColor:"warning",
-                hideAfter:5000,
-                showHideTransition:"fade",
-                icon:"error",
-                position:"top-right",           /*position is not accurate*/
-                stack:2
-            })
+            console.log("please fill all input boxes")
         }
         else if(password!==cpassword)
         {
-            $.toast({
-                textColor:"red",
-                loaderBg:'#fc4f4f',
-                heading:"Warning",
-                text:"Password and Confirm Password must be same",
-                bgColor:"warning",
-                hideAfter:5000,
-                showHideTransition:"fade",
-                icon:"error",
-                position:"top-right",
-                stack:2
-            })
+            console.log("password and confirm password must be same")
         }
         else {
             let value={
@@ -261,18 +239,7 @@ let forms=$('#forms')
                 }
             }).fail((err)=>{
                 console.log(err)
-                $.toast({
-                    textColor:"red",
-                    loaderBg:'#fc4f4f',
-                    heading:"Warning",
-                    text:"Cannot add the user right now",
-                    hideAfter:5000,
-                    showHideTransition:"fade",
-                    icon:"error",
-                    position:"top-right",
-                    stack:2
-                })
-                console.log(err)
+
             })
         }
 
@@ -286,16 +253,7 @@ let forms=$('#forms')
         }
         if(!clgDpt)
         {
-            $.toast({
-                textColor:"red",
-                loaderBg:'#fc4f4f',
-                text:"Invalid Value",
-                hideAfter:5000,
-                showHideTransition:"fade",
-                icon:"error",
-                position:"top-right",
-                stack:2
-            })
+            console.log("OOps something went wrong. May you havenot entered college/depot name")
         }
         else {
             if(e==='College')
@@ -327,18 +285,9 @@ let forms=$('#forms')
 
                 })
 
-            }).fail(()=>{
+            }).fail((err)=>{
                 console.log("oopsss")
-                $.toast({
-                    textColor:"red",
-                    loaderBg:'#fc4f4f',
-                    text:"Invalid Value",
-                    hideAfter:5000,
-                    showHideTransition:"fade",
-                    icon:"error",
-                    position:"top-right",
-                    stack:2
-                })
+                console.log(err)
             })
         }
     }

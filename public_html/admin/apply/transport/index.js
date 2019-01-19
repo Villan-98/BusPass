@@ -11,33 +11,11 @@ $(function(){
         let collDep=$('#collDep').val()
         if(!name||!dob||!secret||!role||!password||!role||!cpassword||!collDep)
         {
-            $.toast({
-                textColor:"red",
-                loaderBg:'#fc4f4f',
-                heading:"Warning",
-                text:"All fields are mandatory",
-                bgColor:"warning",
-                hideAfter:5000,
-                showHideTransition:"fade",
-                icon:"error",
-                position:"top-right",           /*position is not accurate*/
-                stack:2
-            })
+            console.log("please fill all the attribute")
         }
         else if(password!==cpassword)
         {
-             $.toast({
-                 textColor:"red",
-                 loaderBg:'#fc4f4f',
-                 heading:"Warning",
-                 text:"Password and Confirm Password must be same",
-                 bgColor:"warning",
-                 hideAfter:5000,
-                 showHideTransition:"fade",
-                 icon:"error",
-                 position:"top-right",
-                 stack:2
-                })
+            console.log("confirm password and password must be same")
         }
         else {
             let value={
@@ -66,20 +44,9 @@ $(function(){
                                         `)
                 }
             }).fail((err)=>{
+                console.log("Oops something went wrong: ")
                 console.log(err)
-                $.toast({
-                    textColor:"red",
-                    loaderBg:'#fc4f4f',
-                    heading:"Warning",
-                    text:"Cannot add the user right now",
-                    bgColor:"warning",
-                    hideAfter:5000,
-                    showHideTransition:"fade",
-                    icon:"error",
-                    position:"top-right",
-                    stack:2
-                })
-                console.log(err)
+
             })
         }
 
