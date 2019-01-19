@@ -1,5 +1,6 @@
 const User=require('../db/models').user
 const depot=require('../db/models').depot
+const college=require('../db/models').college
 module.exports={
     insert_user:async(requery)=>{
         console.log(requery)
@@ -34,13 +35,15 @@ module.exports={
     },
     allUser:async(requery)=>{
         return User.findAll({
-           /* include:[{
+           include:[{
                 model:depot,
                 attributes:['name'],
-                where:      {
-                    id:User.DepotId
-                }
-            }]*/
+
+            },{
+               model:college,
+               attributes:['name'],
+
+           }]
         })
     }
 }

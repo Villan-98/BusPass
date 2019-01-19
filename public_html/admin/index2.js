@@ -1,6 +1,6 @@
 /* Created by Villan-98 on 22/08/2018*/
 $(function(){
-    console.log("connected")
+   // console.log("connected")
     const anchor=$('a')
     anchor.click((e)=>{
         const $navId=e.target.getAttribute('id')
@@ -126,7 +126,7 @@ $(function(){
             })
                 .then((data)=>{
                     let users=data.data
-
+                  //  console.log(users)
                     $('#headDiv').show()
                     $('#headDiv').addClass('offset-lg-2 col-lg-9 col-md-12 mt-5')
                     $('#topHeading').empty().append(`Registered User`)
@@ -171,7 +171,16 @@ $(function(){
                         </div>
                         `)
                     users.forEach((user)=>{
-                        console.log(user)
+                      //  console.log(user)
+                        let coll_dep
+                        if(user.DepotId!==null)
+                            coll_dep=user.Depot.name
+                        else if(user.collegeId!==null)
+                            coll_dep=user.college.name
+                        else
+                            coll_dep="admin"
+
+
 
                         $('#clgList').append(`
                     <li href="#" class="list-group-item  px-3">
@@ -183,7 +192,7 @@ $(function(){
                             ${user.role}
                          </div>
                          <div class="px-3  col-3">
-                            ${user.clgDep}
+                       ${coll_dep}
                          </div>
                          
                          <div class="text-danger text-center" id="${user.id}" >
