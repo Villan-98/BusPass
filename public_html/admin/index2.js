@@ -8,24 +8,28 @@ $(function(){
         {
             $('#headDiv').show()
 
-            $('#headDiv').removeClass('col-lg-9')
-            $('#headDiv').addClass('offset-lg-2 col-lg-8 col-md-12 mt-5')
+            $('#headDiv').removeClass('col-lg-9 offset-lg-2')
+            $('#headDiv').addClass(' col-lg-12 col-md-12 mt-5')
             $('#topHeading').empty().append('Registered Colleges')
             $('#forms').empty().append(`
                             <div class="row ">
-                                <div class="col-lg-8 offset-lg-2">
+                                <div class="col-lg-12 ">
                                     <ul class="list-group " id="clgList">
                                         <li class="list-group-item bg-dark ">
                                             <div class=" mx-1 row py-2  text-white">
-                                                <div class="col-4">
+                                                <div class="col-3">
                                                     College Name
                                                 </div>
-                                                <div class="col-lg-4 pl-md-5 col-md-5 text-center offset-lg-1">
+                                                
+                                                <div class="col-lg-3 ml-0 pl-md-5 col-md-5 text-center offset-lg-1">
+                                                    Transport Head
+                                                </div>
+                                                <div class="col-lg-3 pl-md-5 col-md-5 text-center offset-lg-1">
                                                     Depot Name
                                                 </div>
                                                 <div class="col-1   offset-1">
                                                      Delete
-                                                </div>
+                                                </div>  
                                             </div>
                                         </li>
                                     </ul>
@@ -37,13 +41,20 @@ $(function(){
             })
                 .then((data)=>{
                     let colleges=data.data
-                    colleges.forEach((college)=>{$('#clgList').append(`
+                    console.log(colleges)
+                    colleges.forEach((college)=>{
+                        console.log(college)
+                        $('#clgList').append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
-                         <div class="px-3 offset-1 col-4">
+                         <div class="px-3 offset-1 col-3">
                             ${college.name}
                          </div>
-                         <div class="px-3 offset-1 col-4">
+                         
+                         <div class="px-3 offset-1 ml-0 col-3">
+                            ${college.users[0].userName}
+                         </div>
+                         <div class="px-3 offset-1 col-3">
                             ${college.Depot.name}
                          </div>
                          <div class="text-danger text-center" id="${college.id}" onclick="deleteCollege(id)">
@@ -57,10 +68,12 @@ $(function(){
             })
 
         }
+
         if($navId==='navDptDetail')
         {
+
             $('#headDiv').show()
-            $('#headDiv').removeClass('col-lg-9')
+            $('#headDiv').removeClass('col-lg-9 col-lg-12')
             $('#headDiv').addClass('offset-lg-2 col-lg-8 col-md-12 mt-5')
             $('#topHeading').empty().append('Registered Depot')
             $('#forms').empty().append(`
@@ -128,6 +141,8 @@ $(function(){
                     let users=data.data
                   //  console.log(users)
                     $('#headDiv').show()
+
+                    $('#headDiv').removeClass('col-lg-9 col-lg-12')
                     $('#headDiv').addClass('offset-lg-2 col-lg-9 col-md-12 mt-5')
                     $('#topHeading').empty().append(`Registered User`)
                     $('#forms').empty().append(`

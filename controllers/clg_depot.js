@@ -30,6 +30,9 @@ module.exports={
            include:[{
                model:depot,
                attributes:['name']
+           },{
+               model:user,
+               attributes:['userName']
            }]
 
        })
