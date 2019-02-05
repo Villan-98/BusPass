@@ -1,7 +1,7 @@
 {
   "DB":{
-    "NAME":"database",
-    "USER":"user",
+    "NAME":"busPass",
+    "USER":"busAdmin",
     "PASSWORD":"password"
   },
   "secret":"abc",
