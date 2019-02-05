@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apply</title>
     <link rel="stylesheet" href="../../../bootstrap&jquery/bootstrap/dist/css/bootstrap.css">
 </head>
 <body class="bg-light">
-
 <div class="container">
     <div class="bg-white mt-5 px-4">
 
         <div class="col-12 bg-dark">
             <h2 class="text-center py-2 text-white">Application for Bus Pass</h2>
         </div>
+        
         <form method="post" action="/api/v1/application/" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-lg-6  col-md-12">
@@ -61,34 +60,36 @@
                 <div class="form-group col-lg-6 col-md-12">
                 <label for="institute">Institute</label>
                 <select id="institute" name="institute" class="form-control col-md-6">
-
+                    <option value="None">None</option>
+                    <option value="Delhi Technological University">Delhi Technological University</option>
+                    <option value="NSIT"> NSIT Dwarka </option>
+                    <option value="IGDTU">IGDTU</option>
+                    <option value="Other">Other</option>
                 </select>
                 </div>
             </div>
-             <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="feeReceipt">Upload Fee Receipt</label>
-                            <input type="file" class="form-control" id="feeReceipt" name="photo" >
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="idCard">Upload Identity Card</label>
-                            <input type="file" class="form-control" id="idCard" name="photo" >
-                        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="feeReceipt">Upload Fee Receipt</label>
+                    <input type="file" class="form-control-file" id="feeReceipt" name="photo" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="idCard">Upload Identity Card</label>
+                    <input type="file" class="form-control-file" id="idCard" name="photo" >
+                </div>
              </div>
             <div class="form-row">
                 <div class="col-lg-6 col-md-12">
                     <div class="form-group px-2 alert-warning">
                         <label for="payment"> <p>Make a payment at  URL <a href="https://paypal.me/xyz/515">paypal.me/xwz/515 </a>and send us the snapshot of it</p>  </label>
-
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="form-group">
                         <label for="payment">Upload the snapshot of payment made</label>
-                        <input type="file" class="form-control" id="payment" name="photo" >
+                        <input type="file" class="form-control-file" id="payment" name="photo" >
                     </div>
                 </div>
-
             </div>
             <div class="form-group row">
                 <div class="col-sm-10 text-center">
