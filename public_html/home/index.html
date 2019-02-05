@@ -9,44 +9,18 @@
 
     <link rel="stylesheet" href="../../bootstrap&jquery/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
+
 <nav class="navbar navbar-dark bg-dark justify-content-end">
 
-    <a class="nav-link px-4" href="/" style="font-size:15px">Home</a>
+    <a class="nav-link px-4" href="#" id="navAdmin"  style="font-size:15px"> Home</a>
 
-    <a class="nav-link px-4" href="/apply" style="font-size:15px">Apply</a>
+    <a class="nav-link px-4 text-primary" href="/auth/signin"  id="navDepot" style="font-size:15px">Signin</a>
 
-    <a class="nav-link px-4" name="forms" href="/" style="font-size:15px">Signin</a>
+    <a class="nav-link  px-4 text-primary" href="/apply" id="navTransport" style="font-size:15px">Register for new pass</a>
 
-    <a class="nav-link px-4" name="forms" href="/" style="font-size:15px">Signup</a>
+    <a class="nav-link  px-4 text-primary" id="navStatus" href="/status" style="font-size:15px">Status</a>
 
-    <a class="nav-link px-4" href="/" style="font-size:15px">Status</a>
-    </ul>
-    </div>
 </nav>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 <script src="../../bootstrap&jquery/jquery/dist/jquery.js"></script>
 <script src="../../bootstrap&jquery/bootstrap/dist/js/bootstrap.js"></script>
 <script src="index.js"></script>
