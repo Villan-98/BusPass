@@ -93,7 +93,7 @@ app.use('/user/',(req,res,next)=>{
 })
 
 //some static files//
-app.use('/bowerComponents',express.static(__dirname+'/bower_components'))
+app.use('/bootstrap&jquery',express.static(__dirname+'/bootstrap&jquery'))
 app.use('/',express.static(__dirname+'/public_html/home'))
 app.use('/admin',express.static(__dirname+'/public_html/admin'))
 app.use('/user',express.static(__dirname+'/public_html/user'))
