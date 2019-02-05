@@ -1,13 +1,13 @@
 {
   "DB":{
-    "NAME":"database",
-    "USER":"user",
+    "NAME":"busPass",
+    "USER":"busAdmin",
     "PASSWORD":"password"
   },
   "secret":"abc",
   "pdfCrowd":{
-    "apiKey":"ec0ac97b39a8d596bf609514dskdfljskaflskjb50dd41",
-    "url":"https://light-crab-27.localtunnel.me/registered_application?id=",
+    "apiKey":"Api-Key",
+    "url":"Your Domain name",
     "userName":"UserName"
   },
 
