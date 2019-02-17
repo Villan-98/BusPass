@@ -390,7 +390,7 @@ $(function() {
     console.log("====DELETE USER FUNCTION====", id);
     if (
       confirm(
-        "Deleting depot may result in deletion of all Depot manager and colleges associated with it"
+        "DELETING USER WILL PERMANENTLY DELETE ITS DATA. PLEASE CONFIRM. "
       )
     ) {
       $.ajax({
@@ -405,6 +405,7 @@ $(function() {
         },
         error: function() {
           console.log("OOPS");
+          alert("User not deleted! Please try again!.");
         }
       });
     }
