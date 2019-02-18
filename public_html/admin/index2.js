@@ -55,12 +55,13 @@ function UserDetails() {
                           `);
     users.forEach(user => {
       //  console.log(user)
-      let coll_dep;
-      if (user.DepotId !== null) coll_dep = user.Depot.name;
-      else if (user.collegeId !== null) coll_dep = user.college.name;
-      else coll_dep = "admin";
+      if (user.userName != "admin") {
+        let coll_dep;
+        if (user.DepotId !== null) coll_dep = user.Depot.name;
+        else if (user.collegeId !== null) coll_dep = user.college.name;
+        else coll_dep = "admin";
 
-      $("#clgList").append(`
+        $("#clgList").append(`
                       <li href="#" class="list-group-item  px-3">
                       <div class="row">
                            <div class="px-3 offset-1 col-3">
@@ -81,6 +82,7 @@ function UserDetails() {
                       </div>
                       </li>
   `);
+      }
     });
   });
 }
