@@ -107,14 +107,14 @@ const application=db.define('application',{
 })
 //college.hasMany(user)
 application.belongsTo(college)
-depot.hasMany(user)
+depot.hasOne(user)
 depot.hasMany(college)
 college.belongsTo(depot)
 user.belongsTo(depot)
 user.belongsTo(college)
-college.hasMany(user)
+college.hasOne(user)
 db.sync({
-   // alter:true
+   //alter:true
    // force:true
 }).then(()=>{
     console.log("db sync")

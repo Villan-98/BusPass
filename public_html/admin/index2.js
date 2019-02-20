@@ -134,6 +134,11 @@ $(function() {
           console.log(colleges);
           colleges.forEach(college => {
             console.log(college);
+            let transportHead
+            if(college.user===null)
+            transportHead='--'
+            else
+            transportHead=college.user.userName
             $("#clgList").append(`
                     <li href="#" class="list-group-item  px-3">
                     <div class="row">
@@ -142,7 +147,7 @@ $(function() {
                          </div>
                          
                          <div class="px-3 offset-1 ml-0 col-3">
-                            ${college.users[0].userName}
+                            ${transportHead}
                          </div>
                          <div class="px-3 offset-1 col-3">
                             ${college.Depot.name}
@@ -198,10 +203,10 @@ $(function() {
 
           depot.forEach(depot => {
             console.log(depot);
-            if (depot.users.length === 0) {
-              ManagerName = "--";
+            if (depot.user=== null) {
+              managerName = "--";
             } else {
-              ManagerName = depot.users[0].userName;
+              managerName = depot.user.userName;
             }
             $("#dptList").append(`
                     <li href="#" class="list-group-item  px-3">
@@ -210,7 +215,7 @@ $(function() {
                             ${depot.name}
                          </div>
                          <div class="px-3 offset-1 col-4">
-                            ${ManagerName}
+                            ${managerName}
                          </div>
                          <div class="text-danger text-center" id="${
                            depot.id
