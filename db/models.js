@@ -13,7 +13,8 @@ const user=db.define('user',{
     },
    userName:{
             allowNull:false,
-            type:dt.STRING
+            type:dt.STRING,
+            unique:true
         },
     password:{
         allowNull:false,

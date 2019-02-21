@@ -12,12 +12,14 @@ route.post('/addUser',(req,res)=>{
             //console.log("here is the request")
             if(req.body.secret===config.secret)
             {
+                console.log("request")
                 ctrlUser.insert_user(req.body)
                     .then((data)=>{
                         res.status(201).send({
                             success:true
                         })
                     }).catch((err)=>{
+                        console.log("error")
                         console.log(err)
                     res.status(500).send({
                         success:false,

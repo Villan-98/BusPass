@@ -236,10 +236,20 @@ let forms=$('#forms')
                                                     </div>
                                             </div>
                                         `)
-                }
-            }).fail((err)=>{
-                console.log(err)
+                },
+                error:function(error){
+                    console.log(error)
+                    forms.empty().append(`
+                    <div class="bg-light offset-2">
 
+                            <div class="row mt-5 py-5">
+                                    <div class="col ">
+                                        <h2 class="h2 text-center text-alert " > Oops something went wrong</h2>
+                                    </div>
+                            </div>
+                    </div>
+                `)
+                }
             })
         }
 

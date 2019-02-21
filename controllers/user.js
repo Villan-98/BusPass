@@ -5,7 +5,7 @@ module.exports = {
   insert_user: async requery => {
     console.log(requery);
     if (requery.role === "Transport Head") {
-      User.create({
+      return User.create({
         userName: requery.name,
         password: requery.password,
         role: requery.role,
@@ -13,14 +13,13 @@ module.exports = {
         collegeId: requery.collDep
       });
     } else {
-      User.create({
+      return User.create({
         userName: requery.name,
         password: requery.password,
         role: requery.role,
         clgDep: requery.collDep,
-
         DepotId: requery.collDep
-      });
+      })
     }
   },
   deleteUser: async requery => {
