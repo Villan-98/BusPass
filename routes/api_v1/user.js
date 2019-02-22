@@ -72,6 +72,30 @@ route.get("/", (req, res) => {
     res.redirect("/auth/signin");
   }
 });
+
+route.post("/editProfile", (req, res) => {
+  console.log("========EDIT PROFILE ROUTE =========");
+  console.log(req.body);
+  console.log(req.user.password);
+  if (req.user.password != req.body.old_password) {
+    res.status(200).send({
+      success: false,
+      message: "OldPasswordWrong"
+    });
+  } else {
+    requery = {
+      username: req.user.userName,
+      new_password: req.body.new_password
+    };
+    console.log(requery);
+    ctrlUser.editPassword(requery).then(message => {
+      res.status(200).send({
+        success: true,
+        message: "PasswordChanged"
+      });
+    });
+  }
+});
 route.delete("/:id", (req, res) => {
   console.log("===DELETE USER ROUTE===");
   ctrlUser

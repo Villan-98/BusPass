@@ -50,5 +50,34 @@ module.exports = {
         }
       ]
     });
+  },
+  editPassword: async requery => {
+    console.log("===EDIT PASSWORD CONTROLLER===");
+    console.log(requery);
+    //   User.find({ where: { userName: requery.username } }).on("success", function(
+    //     user
+    //   ) {
+    //     if (user) {
+    //       user
+    //         .update({
+    //           password: requery.new_password
+    //         })
+    //         .success(function() {
+    //           return "UPDATED";
+    //         });
+    //     }
+    //   });
+
+    User.update(
+      {
+        password: requery.new_password
+      },
+      {
+        where: {
+          userName: requery.username
+        }
+      }
+    );
+    return "UPDATED";
   }
 };
