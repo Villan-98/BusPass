@@ -64,7 +64,7 @@ let forms=$('#forms')
                         let dpt4clg=$('#dpt4clg')
                         depots.forEach((depot)=>{
                             console.log(depot.name)     //no output on front end?
-                            dpt4clg.append(`<option value="${depot.name}">${depot.name}</option>`)
+                            dpt4clg.append(`<option value="${depot.id}">${depot.name}</option>`)
                         })
 
                     })
@@ -244,7 +244,7 @@ let forms=$('#forms')
 
                             <div class="row mt-5 py-5">
                                     <div class="col ">
-                                        <h2 class="h2 text-center text-alert " > Oops something went wrong</h2>
+                                        <h2 class="h2 text-center text-success " > Oops something went wrong</h2>
                                     </div>
                             </div>
                     </div>
@@ -259,7 +259,7 @@ let forms=$('#forms')
         let subUrl
         let value={
             name:$('#clgDpt').val(),
-            depot:$('#dpt4clg').val()
+            dptId:$('#dpt4clg').val()
         }
         if(!clgDpt)
         {
@@ -296,8 +296,10 @@ let forms=$('#forms')
                 })
 
             }).fail((err)=>{
-                console.log("oopsss")
-                console.log(err)
+                if(err.status===409)
+                alert("College/Depot name already exist")
+                else
+                alert("Oops something went wrong!")
             })
         }
     }

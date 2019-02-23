@@ -37,6 +37,13 @@ module.exports={
 
        })
     },
+    getOneCollege: async(requery)=>{
+        return college.findOne({
+            where:{
+               name:requery.name 
+            }
+        })
+    },
     getAllDepot:async()=>{
         return depot.findAll({
             attributes:['name','id'],

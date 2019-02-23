@@ -33,9 +33,9 @@ const depot=db.define('Depot',{
         primaryKey:true
     },
     name:{
-        primaryKey:true,
         allowNULL:false,
-        type:dt.STRING
+        type:dt.STRING,
+        unique:true
     }
 })
 const college=db.define('college',{
@@ -46,7 +46,8 @@ const college=db.define('college',{
     },
     name:{
         allowNULL:false,
-        type:dt.STRING
+        type:dt.STRING,
+        unique:true
     }
 })
 const application=db.define('application',{
@@ -115,7 +116,7 @@ user.belongsTo(depot)
 user.belongsTo(college)
 college.hasOne(user)
 db.sync({
-   //alter:true
+    //alter:true
    // force:true
 }).then(()=>{
     console.log("db sync")

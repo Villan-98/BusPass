@@ -23,20 +23,35 @@ route.post('/addDepot',(req,res)=>{
     {
         if(req.user.role==='admin')
         {
-            ctrlDepot.insertDepot(req.body)
-                .then(()=>{
-                    res.status(201).send({
-                        success:true,
-                        code:"201",
+            req.body['dptName']=req.body.name
+            ctrlDepot.getOneDepot(req.body)
+            .then((data)=>{
+                if(data===null)
+                {
+                    ctrlDepot.insertDepot(req.body)
+                    .then(()=>{
+                        res.status(201).send({
+                            success:true,
+                            code:"201",
+                        })
                     })
-                })
-                .catch((err)=>{
-                    console.log(err)
-                    res.status(500).send({
-                        code:"500",
-                        message:"Internal Server Error"
+                    .catch((err)=>{
+                        console.log(err)
+                        res.status(500).send({
+                            code:"500",
+                            message:"Internal Server Error"
+                        })
                     })
-                })
+                }
+                else
+                {
+                    res.status(409).send({
+                        code:"409",
+                        message:"resource alredy exist"
+                    })
+                }
+            })
+            
         }
         else {
             res.status(401).send({

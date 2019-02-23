@@ -26,14 +26,17 @@ route.post('/addCollege',(req,res)=>{
     {
         if(req.user.role==='admin')
         {
-            //console.log(req.body)
-           let  body={
-                dptName:req.body.depot
-            }
-            ctrlCollege.getOneDepot(body)
-                .then((data)=> {
-                    //console.log(data.id)
-                    req.body['dptId']=data.id
+            console.log(req.body)
+            ctrlCollege.getOneCollege(req.body)
+            .then((data)=>{
+                if(data!=null)
+                res.status(409).send({
+                    success:false,
+                    code:409,           //status code for conflict with present state
+                    message:"College by this name already exist"
+                })
+                else
+                {
                     ctrlCollege.insertCollege(req.body)
                         .then(()=>{
                             res.status(201).send({
@@ -42,14 +45,15 @@ route.post('/addCollege',(req,res)=>{
                             })
                         })
                         .catch((err)=>{
-                           // console.log(err)
+                             console.log(err)
                             res.status(500).send({
                                 code:"500",
                                 message:"Internal Server Error"
                             })
                         })
-                })
-
+                }
+            })
+            
         }
         else {
             res.status(401).send({
