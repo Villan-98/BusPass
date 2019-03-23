@@ -88,11 +88,30 @@ route.post("/editProfile", (req, res) => {
       new_password: req.body.new_password
     };
     console.log(requery);
+
     ctrlUser.editPassword(requery).then(message => {
-      res.status(200).send({
-        success: true,
-        message: "PasswordChanged"
-      });
+      req.user=null
+      req.logout()
+      req.session.destroy((err)=>{
+        if(err)
+        {
+            console.log(err)
+            res.status(500).json({
+                code:"500",
+                message:"Internal Server Error"
+            })
+        }
+        else
+        {
+
+          res.status(200).send({
+            success: true,
+            message: "PasswordChanged"
+          });
+        }
+       })
+      
+      
     });
   }
 });

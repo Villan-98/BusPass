@@ -76,7 +76,8 @@ $(function() {
             );
           }
           if (response.message == "PasswordChanged") {
-            ////////THIS PART DOUBT
+            alert("Password changed")
+            location.reload()
           }
         }
       });
